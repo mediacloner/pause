@@ -29,3 +29,20 @@
 
 
 ![Data Model](./DocSrc/dataModel)
+
+
+## Logo
+
+ Lightweight logo created with one Google Font that can integrate easily anywhere.
+
+![Google Fonts](./DocSrc/logos/pauseLogo.png)
+
+### Logo
+
+![Logo](./DocSrc/logos/pause.png)
+
+### Short Logo
+
+![Short Logo](./DocSrc/logos/shortlogo.png)
+
+
