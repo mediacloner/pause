@@ -1,0 +1,22 @@
+/* font-family: 'Pacifico', cursive; */
+
+.logo {
+
+    font-family: 'Pacifico', cursive;
+    font-size:  400%;
+    
+}
+body {
+    background-color: #eee;
+  }
+
+.topmax {
+    margin-top: 15%
+}
+.topmed {
+    margin-top: 7%
+}
+.topmin{
+
+    margin-top: 5%;
+}
