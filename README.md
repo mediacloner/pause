@@ -53,12 +53,12 @@
 ## Trello
 ![Timeline](./DocSrc/trello.png)
 
-##Grantt
+## Grantt
 
 ![Timeline](./DocSrc/grantt.png)
 
 
-##Calendar
+## Calendar
 
 ![Timeline](./DocSrc/calendar.png)
 
