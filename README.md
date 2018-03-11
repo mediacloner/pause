@@ -51,16 +51,16 @@
 
 
 ## Trello
-![Timeline](./DocSrc/trello.png)
+![Trello](./DocSrc/trello.png)
 
-## Grantt
+## Gantt
 
-![Timeline](./DocSrc/grantt.png)
+![Gantt](./DocSrc/gantt.png)
 
 
 ## Calendar
 
-![Timeline](./DocSrc/calendar.png)
+![Calendar](./DocSrc/calendar.png)
 
 
 # API
