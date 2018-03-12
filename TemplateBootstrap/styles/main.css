@@ -6,6 +6,13 @@
     font-size:  400%;
     
 }
+
+.logonav {
+
+    font-family: 'Pacifico', cursive;
+    font-size:  150%;
+    
+}
 body {
     background-color: #eee;
   }
@@ -19,4 +26,9 @@ body {
 .topmin{
 
     margin-top: 5%;
+}
+
+
+.navbar-expand-md .navbar-nav .dropdown-menu {
+    position: absolute !important;
 }
