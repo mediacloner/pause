@@ -27,7 +27,7 @@
 ## Data Model
 
 
-![Data Model](./DocSrc/dataModel.png)
+![Data Model](./DocSrc/dataModelv2.png)
 
 
 ## Logo
@@ -45,7 +45,7 @@
 ![Short Logo](./DocSrc/logos/shortlogo.png)
 
 
-# Kaban
+# Kanban
 
 [Trello / Gantt ](https://trello.com/b/sQLDfwlX)
 
