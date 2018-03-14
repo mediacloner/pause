@@ -1,0 +1,17 @@
+{
+  "title": "Users API client with auth (JWT)",
+  "description": "REST API client for managing users based on request-promise, and with auth based on JWT.",
+  "tags": [
+    "node",
+    "js",
+    "request",
+    "promise",
+    "request-promise",
+    "client",
+    "assert",
+    "tdd",
+    "object",
+    "users"
+  ],
+  "created": "2018-03-08T15:21:18.393Z"
+}

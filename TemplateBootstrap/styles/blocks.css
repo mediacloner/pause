@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+.box {
+    background:#fff;
+    transition:all 0.2s ease;
+    border:2px dashed #dadada;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-clip: padding-box;
+    padding:0 20px 20px 20px;
+    min-height:340px;
+  }
+  
+  .box:hover {
+    border:2px solid rgba(105, 111, 129, 0.719);
+  }
+  
+  .box span.box-title {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 300;
+      text-transform: uppercase;
+  }
+  
+  .box .box-content {
+    padding: 16px;
+    border-radius: 0 0 2px 2px;
+    background-clip: padding-box;
+    box-sizing: border-box;
+  }
+  .box .box-content p {
+    color:#515c66;
+    text-transform:none;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  }  
