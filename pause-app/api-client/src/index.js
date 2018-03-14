@@ -7,7 +7,7 @@ const api = {
         }
     },
 
-    _call(method, path, body, token) {
+    _call(method, path, body) {
         const options = {
             method,
             uri: `${this._baseUrl()}/${path}`,
@@ -16,7 +16,6 @@ const api = {
 
         if (body) options.body = body
 
-        if (token) options.headers = { authorization: `Bearer ${token}` }
 
         return rp(options)
     },
@@ -24,26 +23,44 @@ const api = {
     login(username, password) {
         return this._call('post', 'login', { username, password })
     },
-
-    list(token) {
-        return this._call('get', 'users', undefined, token)
+    
+    listPosts() {
+        return this._call('get', 'list')
     },
 
-    register(token, name, surname, email, username, password) {
-        return this._call('post', 'user', { name, surname, email, username, password }, token)
+    listPostsByUser(id) {
+        return this._call('get', `list/${id}`) 
+ 
     },
 
-    remove(token, id, username, password) {
-        return this._call('delete', `user/${id}`, { username, password }, token)
+    listPostsByGroup(array) {
+        return this._call('get', 'listgroup', array) // TODO: array
     },
 
-    retrieve(token, id) {
-        return this._call('get', `user/${id}`, undefined, token)
+    listPostsBySearch(word) {
+        return this._call('get', `search/${word}`)
     },
 
-    update(token, id, name, surname, email, newUsername, newPassword, username, password) {
-        return this._call('put', `user/${id}`, { name, surname, email, newUsername, newPassword, username, password }, token)
-    }
+    retrievePost (id) {
+        return this._call('get', `list/${id}`)
+    },
+
+    createComment ( owner, comment) {
+        return this._call('post', 'comment', { owner, comment }) 
+    },
+
+    createPost( title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag) {
+        return this._call('post', 'post', { title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag }) // TODO: array
+    },
+
+    createUser ( username, name, surname, email, password, city, country, about) {
+        return this._call('user', 'post', { username, name, surname, email, password, city, country, about }) // TODO: array
+    },
+
+    deleteComment ( id, idUser ){
+        return this._call('delete', `comment/${id}`, { idUser })
+    },
+
 }
 
 module.exports = api
