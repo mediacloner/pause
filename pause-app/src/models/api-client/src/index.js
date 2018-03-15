@@ -50,11 +50,11 @@ const api = {
     },
 
     createPost( title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag) {
-        return this._call('post', 'post', { title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag }) // TODO: array
+        return this._call('post', 'post', { title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag })
     },
 
     createUser ( username, name, surname, email, password, city, country, about) {
-        return this._call('user', 'post', { username, name, surname, email, password, city, country, about }) // TODO: array
+        return this._call('user', 'post', { username, name, surname, email, password, city, country, about })
     },
 
     deleteComment ( id, idUser ){
@@ -63,4 +63,4 @@ const api = {
 
 }
 
-module.exports = api
+module.exports = apiClient

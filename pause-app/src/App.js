@@ -7,8 +7,20 @@ import './styles/blocks.css'
 import './styles/main.css'
 import './styles/post.css'
 import './styles/signin_reg.css'
+import apiClient from "./models/api-client/src/index.js"
+
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      
+    };
+  }
+
+
+
+
   render() {
     return (
       <div>
