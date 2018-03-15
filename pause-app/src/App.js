@@ -7,29 +7,31 @@ import './styles/blocks.css'
 import './styles/main.css'
 import './styles/post.css'
 import './styles/signin_reg.css'
-import apiClient from "./models/api-client/src/index.js"
+import ApiClient from "./models/api-client/src/index.js"
 
+const apiClient = new ApiClient ('http', 'localhost', 5000)
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
 
-      rawData= {}
+      rawData: {}
       
     };
   }
 
 
+
 componentWillMount(){
-  getList()
+  this.getList()
 }
 
 
 getList = () => {
   apiClient
     .listPosts()
-    .then(rawData => this.setState(rawData))
+    .then(rawData => this.setState({rawData}))
     .catch(console.error);
 };
 
