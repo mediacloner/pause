@@ -16,8 +16,6 @@ class ApiClient {
     }
     
     listPosts() {
-       // return this._call('get', 'list')
-
         return data(axios.get(url.resolve(this.baseUrl, 'list')))
     }
 
