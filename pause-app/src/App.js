@@ -14,11 +14,24 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+
+      rawData= {}
       
     };
   }
 
 
+componentWillMount(){
+  getList()
+}
+
+
+getList = () => {
+  apiClient
+    .listPosts()
+    .then(rawData => this.setState(rawData))
+    .catch(console.error);
+};
 
 
   render() {
