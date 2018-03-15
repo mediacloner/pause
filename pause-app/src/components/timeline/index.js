@@ -6,9 +6,9 @@ function Timeline(props) {
     <div>
      
 
-      <div className="container">
-        <div className="row">
-          <h2 className="text-center pauseFont ">·|timeline|·</h2>
+      <div className="container topmed">
+       
+          <h2 className="text-center text-secondary pauseFont ">·|timeline|·</h2>
           <div className="row">
             {props.list.map((post, index) => {
               return (
@@ -28,7 +28,7 @@ function Timeline(props) {
               );
             })}
           </div>
-        </div>
+       
       </div>
     </div>
   );
