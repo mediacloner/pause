@@ -9,7 +9,7 @@ function Signup() {
       </div>
       <div className="container topmin">
         <form className="form-signin">
-          <h2 className="form-signin-heading text-info">User Registration</h2>
+          <h2 className="form-signin-heading text-secondary">User Registration</h2>
           <label htmlFor="inputEmail" className="sr-only">
             Name
           </label>

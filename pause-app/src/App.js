@@ -10,6 +10,7 @@ import ApiClient from "./models/api-client/src/index.js";
 import Timeline from './components/timeline'
 import Navbar from './components/navbar'
 import Signup from './components/signup'
+import Signin from './components/signin'
 import { HashRouter } from "react-router-dom";
 
 const apiClient = new ApiClient("http", "localhost", 5000);
@@ -40,11 +41,15 @@ class App extends Component {
       <HashRouter>
         <div>
 
-          <Signup/>
-{/*           <Navbar/>
-          <Timeline list={this.state.posts} /> */}
+
+{/*           <Signin/> */}
+        <Signup/> 
+{/*          <Navbar/>
+          <Timeline list={this.state.posts} />  */}
         </div>
       </HashRouter>
+
+
     );
   }
 }
