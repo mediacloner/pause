@@ -8,7 +8,7 @@ import "./styles/post.css";
 import "./styles/signin_reg.css";
 import ApiClient from "./models/api-client/src/index.js";
 import Timeline from './components/timeline'
-import Navbar from './components/navbar'
+import NavbarHead from './components/navbarhead'
 import Signup from './components/signup'
 import Signin from './components/signin'
 import { HashRouter } from "react-router-dom";
@@ -43,9 +43,9 @@ class App extends Component {
 
 
 {/*           <Signin/> */}
-        <Signup/> 
-{/*          <Navbar/>
-          <Timeline list={this.state.posts} />  */}
+{/*         <Signup/>  */}
+       <NavbarHead/>
+          <Timeline list={this.state.posts} /> 
         </div>
       </HashRouter>
 
