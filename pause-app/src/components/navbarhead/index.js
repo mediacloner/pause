@@ -1,7 +1,9 @@
 import React from 'react'
 /* import { NavLink } from 'react-router-dom'  */
-import {Collapse,  Navbar,  NavbarToggler,  NavbarBrand,  Nav,  NavItem,  NavLink,  UncontrolledDropdown,
-  DropdownToggle,  DropdownMenu,  DropdownItem } from 'reactstrap';
+import {
+  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown,
+  DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Label, Input
+} from 'reactstrap';
 import "../../styles/navbar.css";
 import "../../styles/main.css";
 
@@ -24,7 +26,7 @@ export default class NavbarHead extends React.Component {
     return (
       <div>
         <Navbar color="dark" className="navbar-dark" light expand="md">
-          <NavbarBrand  href="/"><h1 className="logonav"> ·|pause|·</h1></NavbarBrand>
+          <NavbarBrand href="/"><h1 className="logonav"> ·|pause|·</h1></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -51,6 +53,13 @@ export default class NavbarHead extends React.Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
+              <Form inline>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                  <Input type="Search" name="find" id="find" placeholder="Find..." />
+                </FormGroup>
+                <Button>Search</Button>
+              </Form>
+
             </Nav>
           </Collapse>
         </Navbar>
