@@ -12,6 +12,7 @@ import NavbarHead from './components/navbarhead'
 import Signup from './components/signup'
 import Signin from './components/signin'
 import Newpost from './components/newpost'
+import Newcomment from './components/newcomment'
 import { HashRouter } from "react-router-dom";
 
 const apiClient = new ApiClient("http", "localhost", 5000);
@@ -46,7 +47,8 @@ class App extends Component {
 {/*           <Signin/> */}
 {/*         <Signup/>  */}
        <NavbarHead/>
-       <Newpost/>
+       <Newcomment/>
+{/*        <Newpost/> */}
 {/*           <Timeline list={this.state.posts} />  */}
         </div>
       </HashRouter>
