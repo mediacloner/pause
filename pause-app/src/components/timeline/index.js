@@ -8,7 +8,7 @@ function Timeline(props) {
 
       <div className="container topmed">
        
-          <h2 className="text-center text-secondary pauseFont ">·|timeline|·</h2>
+          <h2 className="text-center text-secondary pauseFont ">{props.header}</h2>
           <div className="row">
             {props.list.map((post, index) => {
               return (

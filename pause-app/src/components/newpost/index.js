@@ -3,21 +3,39 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 
 import "../../styles/main.css";
 
 export default class Newpost extends React.Component {
+
+
+  
+
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        show : 'audio', 
+      };
+    }
+  
+
+    handleViewsPost=(e)=>{
+      e.preventDefault()
+      this.setState({show:e.target.value});
+    }
+
   render() {
     return (
 
         <div className="container topmed">
-        <h2 className="text-right text-center pauseFont ">·|new post|·</h2>
+        <h2 className="text-right text-center text-secondary pauseFont ">·|new post|·</h2>
         <br/>
 
       <Form>
 
         <FormGroup>
           <Label for="exampleSelect">Select</Label>
-          <Input type="select" name="select" id="exampleSelect">
-            <option>Audio</option>
-            <option>Youtube</option>
-            <option>Quote</option>
+          <Input type="select" name="select" value={this.state.show} onChange={this.handleViewsPost} >
+            <option id='audio'   >Audio</option>
+            <option id='youtube' >Youtube</option>
+            <option id='quote'   >Quote</option>
           </Input>
         </FormGroup>
         <FormGroup row>
@@ -41,17 +59,19 @@ export default class Newpost extends React.Component {
         <FormGroup row>
           <Label for="exampleUrl" sm={2}>Url</Label>
           <Col sm={10}>
-          <Input type="url" name="url" id="exampleUrl" placeholder="url placeholder" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleTime" sm={2}>Time</Label>
-          <Col sm={10}>
-          <Input type="text" name="time" id="exampleTime" placeholder="00:00" />
+          <Input type="url" name="url" id="exampleUrl" placeholder="url" />
           </Col>
         </FormGroup>
 
-        <Button className ='float-right'>Submit</Button>
+
+
+            {this.state.show != 'Quote'? (<FormGroup row>
+             <Label for="exampleTime" sm={2}>Time</Label> 
+             <Col sm={10}><Input type="text" name="time" id="exampleTime" placeholder="00:00" /> 
+             </Col>  </FormGroup>):undefined}
+
+            <Button className ='float-right'>Submit</Button>
+
       </Form>
       </div>
     );
