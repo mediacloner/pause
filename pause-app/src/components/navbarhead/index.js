@@ -8,6 +8,7 @@ import "../../styles/navbar.css";
 import "../../styles/main.css";
 import Timeline from '../../components/timeline'
 import Newpost from '../../components/newpost'
+import Post from '../../components/post'
 import ApiClient from "../../models/api-client/src/index.js";
 
 const apiClient = new ApiClient("http", "localhost", 5000);  
@@ -95,7 +96,9 @@ export default class NavbarHead extends React.Component {
           </Collapse>
         </Navbar>
 
+
             {this.state.show == 'newpost'?<Newpost/>:undefined}
+            {this.state.show == 'post'?<Post/>:undefined}
             {this.state.show == 'timeline'?<Timeline list={this.state.posts} header = {this.state.timelineName}/>:undefined}
       </div>
     );
