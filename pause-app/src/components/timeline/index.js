@@ -1,9 +1,54 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import ApiClient from "../../models/api-client/src/index.js";
+
+const apiClient = new ApiClient("http", "localhost", 5000);  
+
 
   export default class Timeline extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      posts: [],
+    }
+  }
+ 
+    getListPosts = () => {
+      
+      apiClient
+        .listPosts()
+        .then(posts => this.setState({ posts: posts.data }))
+        .catch(console.error)
+    }
 
+  /*   componentDidMount() {
+      this.getListPosts()
+    } */
+
+    getListPostsByGroup = (id) => {
+      apiClient
+        .listPostsByGroup(id)
+        .then(posts => this.setState({ posts: posts.data }))
+        .catch(console.error)
+    }
+
+    getListPostsByUser = (id) => {
+
+      apiClient
+        .listPostsByUser(id)
+        .then(posts => this.setState({ posts: posts.data }))
+        .catch(console.error)
+    }
+
+
+
+     componentWillReceiveProps (nextPorps){
+
+       if (nextPorps.header==='·|my timeline|·')  this.getListPostsByUser('5aad486a397f4e4b0dc9a285')
+      else if (nextPorps.header==='·|our timeline|·')    this.getListPostsByGroup('5aad486a397f4e4b0dc9a285')
+      else if (nextPorps.header==='·|just now timeline|·') this.getListPosts() 
+    } 
   
      render() {
       return (
@@ -14,7 +59,7 @@ import { NavLink } from 'react-router-dom'
        
           <h2 className="text-center text-secondary pauseFont ">{this.props.header}</h2>
           <div className="row">
-            {this.props.list.map((post, index) => {
+            {this.state.posts.map((post, index) => {
               return (
                 <div className="col-md-4 text-center key ={post._id}">
                   <div className="box">

@@ -24,7 +24,7 @@ class ApiClient {
  
     }
     listPostsByGroup(id) {
-        return data(axios.post(url.resolve(this.baseUrl, `listgroup/${id}`))) 
+        return data(axios.get(url.resolve(this.baseUrl, `listgroup/${id}`))) 
     }
     search(word) {
         return data(axios.get(url.resolve(this.baseUrl, `search/${word}`)))

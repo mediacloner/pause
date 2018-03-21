@@ -25,14 +25,7 @@ export default class NavbarHead extends React.Component {
       isOpen: false,
       show : 'timeline', 
       timelineName: '·|my timeline|·',
-      posts: [],
     };
-  }
-
-
-  componentDidMount() {
-    this.getList();
-
   }
 
   getList = () => {
@@ -107,7 +100,7 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show == 'newpost'?<Newpost/>:undefined}
             {this.state.show == 'post'?<Post/>:undefined}
-            {this.state.show == 'timeline'?<Timeline list={this.state.posts} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show == 'timeline'?<Timeline  postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
       </div>
     );
   }
