@@ -1,16 +1,20 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function Timeline(props) {
-  return (
+
+  export default class Timeline extends React.Component {
+
+  
+     render() {
+      return (
     <div>
      
 
       <div className="container topmed">
        
-          <h2 className="text-center text-secondary pauseFont ">{props.header}</h2>
+          <h2 className="text-center text-secondary pauseFont ">{this.props.header}</h2>
           <div className="row">
-            {props.list.map((post, index) => {
+            {this.props.list.map((post, index) => {
               return (
                 <div className="col-md-4 text-center key ={post._id}">
                   <div className="box">
@@ -19,7 +23,7 @@ function Timeline(props) {
                       <hr />
                       <p>{post.shortDescription}</p>
                       <br />
-                      <a href="ppc.html" className="btn btn-block btn-info">
+                      <a href="" onClick={this.props.postView} className="btn btn-block btn-info">
                         Read
                       </a>
                     </div>
@@ -33,6 +37,4 @@ function Timeline(props) {
     </div>
   );
 }
-
-
-export default Timeline
+  }

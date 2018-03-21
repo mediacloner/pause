@@ -50,6 +50,14 @@ export default class NavbarHead extends React.Component {
     else if (e.target.id === 'newpost') this.setState( {timelineName: '·|new post|·',  show:'newpost'})
   }
 
+   
+
+  postView=(e)=>{
+    e.preventDefault()
+    this.setState({show: 'post'})
+    
+   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -99,7 +107,7 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show == 'newpost'?<Newpost/>:undefined}
             {this.state.show == 'post'?<Post/>:undefined}
-            {this.state.show == 'timeline'?<Timeline list={this.state.posts} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show == 'timeline'?<Timeline list={this.state.posts} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
       </div>
     );
   }
