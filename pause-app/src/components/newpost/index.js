@@ -1,6 +1,9 @@
 import React from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
 import "../../styles/main.css";
+import ApiClient from "../../models/api-client/src/index.js";
+
+const apiClient = new ApiClient("http", "localhost", 5000);  
 
 export default class Newpost extends React.Component {
 
@@ -11,16 +14,26 @@ export default class Newpost extends React.Component {
         title:'',
         shortDescription:'',
         fullDescription:'',
-        owner:'',
-        idPostTemplate:'',
+        owner:'5aafaa281ca9687a2d6bb1b4',
+        idPostTemplate:'0',
+        URLpath:'',
         tag:'',
         time:''
         }}
   
 
+      addNewPost = (id) => {
+       apiClient
+          .createPost(  this.state.title, this.state.shortDescription, this.state.fullDescription, this.state.owner,this.state.idPostTemplate,this.state.namePostTemplate,this.state.tag, this.state.URLpath, this.state.time)
+          .then(posts => this.setState({ posts: posts.data }))
+          .then (this.props.postResult())
+          .catch(console.error)
+
+          this.props.postResult()
+      }
+
         updatePost = (e) => {
           e.preventDefault()
-
           switch(e.target.id) {
             case 'title':
                 this.setState({title:e.target.value});
@@ -42,6 +55,15 @@ export default class Newpost extends React.Component {
           
             case 'tag':
             this.setState({tag:e.target.value});
+            break;
+
+            case 'URLpath':
+            console.log('yep')
+            this.setState({URLpath:e.target.value});
+            break;
+
+            case 'time':
+            this.setState({time:e.target.value});
             break;
     
         }
@@ -86,13 +108,13 @@ render() {
         <FormGroup row>
           <Label for="tag" sm={2}>Tag</Label>
           <Col sm={10}>
-            <Input type="tag" onChange={ this.updatePost } name="tag" id="tag" placeholder="write a short description for timeline" />
+            <Input type="textarea" onChange={ this.updatePost } name="tag" id="tag" placeholder="write a short description for timeline" />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="exampleUrl" sm={2}>Url</Label>
+          <Label for="Url" sm={2}>Url</Label>
           <Col sm={10}>
-          <Input type="url"onChange={ this.updatePost } name="url" id="exampleUrl" placeholder="url" />
+          <Input type="textarea" onChange={ this.updatePost } name="URLpath" id="URLpath" placeholder="url" />
           </Col>
         </FormGroup>
 
@@ -103,7 +125,7 @@ render() {
              <Col sm={10}><Input type="text" onChange={ this.updatePost } name="time" id="time" placeholder="00:00" /> 
              </Col>  </FormGroup>):undefined}
 
-            <Button className ='float-right'>Submit</Button>
+            <Button onClick={this.addNewPost}className ='float-right'>Submit</Button>
 
       </Form>
       </div>

@@ -4,8 +4,6 @@ import "../../styles/main.css";
 import KudosImg from "./../../img/kudos_ico_red.svg"
 import LinkImg from "./../../img/link_ico_red.svg"
 import CommentsImg from "./../../img/comments_ico_red.svg"
-import ApiClient from "../../models/api-client/src/index.js";
-const apiClient = new ApiClient("http", "localhost", 5000);  
 
 
 export default class Post extends React.Component {
@@ -14,18 +12,9 @@ export default class Post extends React.Component {
         super(props);
 
         this.state = {
-            title:'',
-            shortDescription:'',
-            fullDescription:'',
-            owner:'',
-            counterVisits: '',
-            idPostTemplate:'',
-            tag:'',
-            time:'',
-            createAt:'',
-            URL:''
-            }}
-    
+            show: 'youtube',
+        };
+    }
 
     handleViewsPost = (e) => {
         e.preventDefault()

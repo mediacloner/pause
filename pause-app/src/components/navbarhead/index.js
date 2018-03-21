@@ -48,7 +48,10 @@ export default class NavbarHead extends React.Component {
   postView=(e)=>{
     e.preventDefault()
     this.setState({show: 'post'})
-    
+   }
+   
+   postResult=()=>{
+    this.setState({timelineName: '·|my timeline|·',show: 'timeline'})
    }
 
    prevent=(e)=>{
@@ -102,9 +105,9 @@ export default class NavbarHead extends React.Component {
         </Navbar>
 
 
-            {this.state.show == 'newpost'?<Newpost/>:undefined}
-            {this.state.show == 'post'?<Post/>:undefined}
-            {this.state.show == 'timeline'?<Timeline search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}
+            {this.state.show === 'post'?<Post/>:undefined}
+            {this.state.show === 'timeline'?<Timeline search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
       </div>
     );
   }

@@ -46,8 +46,8 @@ class ApiClient {
          })) 
     }
 
-    createPost(  title, shortDescription, fullDescription, owner,idPostTemplate,namePostTemplate,tag) {
-        return data(axios.post(url.resolve(this.baseUrl, 'post'), {  title,shortDescription,fullDescription,owner,idPostTemplate,namePostTemplate,tag }))
+    createPost(  title, shortDescription, fullDescription, owner,idPostTemplate,namePostTemplate,tag, URLpath, time) {
+        return data(axios.post(url.resolve(this.baseUrl, 'post'), {  title,shortDescription,fullDescription,owner,idPostTemplate,namePostTemplate,tag, URLpath, time }))
     }
 
     createUser ( name, surname, email, username, password, city, country, about, timelineTitle ) {
