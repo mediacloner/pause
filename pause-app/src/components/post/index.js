@@ -26,18 +26,33 @@ export default class Post extends React.Component {
             URL:''
             }}
     
+    componentDidMount=()=>{
+
+        apiClient
+        .retrievePost(this.props.postId)
+        .then(post => {
+            return this.handleFillResult(post)
+
+        })   
+        //.then (this.props.postResult())
+        .catch(console.error)
+
+    }
 
     handleViewsPost = (e) => {
         e.preventDefault()
         this.setState({ show: e.target.value });
     }
-
+    handleFillResult = (post) => {
+           let {title, shortDescription, fullDescription, owner, counterVisits, idPostTemplate, tag, time, createAt, URL} = post.data[0]
+           this.setState( { title, shortDescription, fullDescription, owner, counterVisits, idPostTemplate, tag, time, createAt, URL })
+    }
     render() {
         return (
             <div>
-                {this.state.show == 'youtube'?<Youtube/>:undefined}
-                {this.state.show == 'audio'?<Audio/>:undefined}
-                {this.state.show == 'quote'?<Quote list={this.state.posts} header = {this.state.timelineName}/>:undefined}
+                {this.state.idPostTemplate == '0'?<Audio/>:undefined}
+                {this.state.idPostTemplate == '1'?<Youtube/>:undefined}
+                {this.state.idPostTemplate == '2'?<Quote list={this.state.posts} header = {this.state.timelineName}/>:undefined}
             </div>
         );
     }
