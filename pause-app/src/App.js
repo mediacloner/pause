@@ -21,22 +21,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      posts: [],
+ 
       user: 0,
       page: 'search'
     };
   }
 
-  componentDidMount() {
-    this.getList();
-  }
 
-  getList = () => {
-    apiClient
-      .listPosts()
-      .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error);
-  };
+
 
   render() {
     return (

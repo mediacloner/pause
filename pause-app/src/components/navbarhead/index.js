@@ -25,30 +25,34 @@ export default class NavbarHead extends React.Component {
       isOpen: false,
       show : 'timeline', 
       timelineName: '·|my timeline|·',
+      search: ''
     };
   }
 
-  getList = () => {
-    apiClient
-      .listPosts()
-      .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error);
-  };
+
 
   handleViews=(e)=>{
     e.preventDefault()
     if (e.target.id === 'myTimeline') this.setState( {timelineName: '·|my timeline|·', show:'timeline'})
     else if (e.target.id === 'ourTimeline') this.setState( {timelineName: '·|our timeline|·', show:'timeline'})
     else if (e.target.id === 'justnowTimeline') this.setState( {timelineName: '·|just now timeline|·', show:'timeline'})
+    else if (e.target.id === 'search') this.setState( {timelineName: '·|results|·', show:'timeline'})
     else if (e.target.id === 'newpost') this.setState( {timelineName: '·|new post|·',  show:'newpost'})
   }
 
    
+  updateSearch = (e) => {
+    this.setState({ search: e.target.value })}
 
+    
   postView=(e)=>{
     e.preventDefault()
     this.setState({show: 'post'})
     
+   }
+
+   prevent=(e)=>{
+    e.preventDefault()
    }
 
   toggle() {
@@ -87,11 +91,11 @@ export default class NavbarHead extends React.Component {
               <NavItem>
                 <NavLink href="">Settings</NavLink>
               </NavItem>
-              <Form inline>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                  <Input type="Search" name="find" id="find" placeholder="Find..." />
-                </FormGroup>
-                <Button>Search</Button>
+              <Form inline  id="search" onSubmit={ this.prevent }>
+                <FormGroup  id="search" className="mb-2 mr-sm-2 mb-sm-0">
+                  <Input onChange={ this.updateSearch } type="Search" name="find" id="find" placeholder="Find..." />
+                  <Button id='search' onClick={this.handleViews}>Search</Button>
+                </FormGroup>  
               </Form>
             </Nav>
           </Collapse>
@@ -100,7 +104,7 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show == 'newpost'?<Newpost/>:undefined}
             {this.state.show == 'post'?<Post/>:undefined}
-            {this.state.show == 'timeline'?<Timeline  postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show == 'timeline'?<Timeline search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
       </div>
     );
   }
