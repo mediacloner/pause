@@ -20,9 +20,6 @@ export default class Newpost extends React.Component {
 
         updatePost = (e) => {
           e.preventDefault()
-          console.log(e.target.selectedIndex)
-          console.log(e.target.value)
-          console.log(e.target.id)
 
           switch(e.target.id) {
             case 'title':
