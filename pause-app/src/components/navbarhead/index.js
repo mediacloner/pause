@@ -99,7 +99,7 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show == 'newpost'?<Newpost/>:undefined}
             {this.state.show == 'post'?<Post/>:undefined}
-            {this.state.show == 'timeline'?<Timeline list={this.state.posts} header = {this.state.timelineName}/>:undefined}
+            {this.state.show == 'timeline'?<Timeline list={this.state.posts} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
       </div>
     );
   }
