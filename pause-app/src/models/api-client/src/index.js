@@ -11,7 +11,7 @@ class ApiClient {
     }
 
   
-     login(username, password) {
+    login(username, password) {
         return this._call('post', 'login', { username, password })
     }
     
@@ -23,34 +23,39 @@ class ApiClient {
         return data(axios.get(url.resolve(this.baseUrl, `list/${id}`)))
  
     }
-
-    listPostsByGroup(arrObj) {
-        return data(axios.post(url.resolve(this.baseUrl, 'task'), { arrObj })) // TODO: array
+    listPostsByGroup(id) {
+        return data(axios.post(url.resolve(this.baseUrl, `listgroup/${id}`))) 
     }
-
-    listPostsBySearch(word) {
+    search(word) {
         return data(axios.get(url.resolve(this.baseUrl, `search/${word}`)))
     }
+  
 
     retrievePost (id) {
         return data(axios.get(url.resolve(this.baseUrl, `post/${id}`)))
     }
-
-    createComment ( owner, comment) {
-        return data(axios.post(url.resolve(this.baseUrl, 'comment'), { owner, comment })) 
+    retrieveUser (id) {
+        return data(axios.get(url.resolve(this.baseUrl, `user/${id}`)))
     }
 
-    createPost( title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag) {
-        return data(axios.post(url.resolve(this.baseUrl, 'post'), { title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag }))
+
+
+    createComment ( id, userId, comment) {  // id == post
+        return data(axios.post(url.resolve(this.baseUrl, `comment/${id}`), {
+            userId, comment
+         })) 
     }
 
-    createUser ( username, name, surname, email, password, city, country, about) {
-        return data(axios.post(url.resolve(this.baseUrl, 'user'), { username, name, surname, email, password, city, country, about }))
+    createPost(  title, shortDescription, fullDescription, owner,idPostTemplate,namePostTemplate,tag) {
+        return data(axios.post(url.resolve(this.baseUrl, 'post'), {  title,shortDescription,fullDescription,owner,idPostTemplate,namePostTemplate,tag }))
     }
 
-    deleteComment ( id, idUser ){
-        return this._call('delete', { idUser })
-        return data(axios.delete(url.resolve(this.baseUrl, `comment/${id}`), {idUser}))
+    createUser ( name, surname, email, username, password, city, country, about, timelineTitle ) {
+        return data(axios.post(url.resolve(this.baseUrl, 'user'), { name, surname, email, username, password, city, country, about, timelineTitle  }))
+    }
+
+    deleteComment ( id ){
+        return data(axios.delete(url.resolve(this.baseUrl, `comment/${id}`)))
     }
 
 }
