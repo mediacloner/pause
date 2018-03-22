@@ -69,11 +69,11 @@ function Youtube() {
                     <div className="row">
                         <div className="col-md-8 blog-main">
                             <h3 className="pb-3 mb-4 font-italic border-bottom">
-                                Title of your page of post
+                                Title of your page of post 
                             </h3>
                             <div className="blog-post">
-                                <strong className="d-inline-block mb-2 text-primary">Developers</strong>
-                                <h2 className="blog-post-title">How "oldschool" graphics worked in Commodore and Nintendo</h2>
+                                <strong className="d-inline-block mb-2 text-primary">Developers  </strong>
+                                <h2 className="blog-post-title">How "oldschool" graphics worked in Commodore and Nintendo </h2>
                                 <p className="blog-post-meta">January 1, 2018 by <a href="#">Mediacloner</a></p>
                                 <h3>Presentation</h3>
                                 <p>I cover the limitations of color on older 1980's computers and game consoles such as the Nintendo Entertainment System and the Commodore 64.
