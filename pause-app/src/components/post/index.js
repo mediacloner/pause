@@ -157,8 +157,7 @@ export default class Post extends React.Component {
 }
 
 function Youtube(props) {
-  return (
-    <div>
+  return <div>
       <div>
         <main role="main" className="container topmed">
           <div className="row">
@@ -180,19 +179,7 @@ function Youtube(props) {
                 <p>{props.shortDescription}</p>
                 <h3>Video</h3>
                 <div className="embed-responsive embed-responsive-16by9">
-                  <iframe
-                    width={560}
-                    height={315}
-                    src={
-                      "https://www.youtube.com/embed/" +
-                      props.youtubeParser(props.URLpath) +
-                      "?start=" +
-                      props.time
-                    }
-                    frameBorder={0}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                  />
+                  <iframe width={560} height={315} src={"https://www.youtube.com/embed/" + props.youtubeParser(props.URLpath) + "?start=" + props.time} frameBorder={0} allow="autoplay; encrypted-media" allowFullScreen />
                 </div>
                 <blockquote>
                   <p>{props.fullDescription}</p>
@@ -201,12 +188,7 @@ function Youtube(props) {
                   <button type="button" className="btn">
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
-                  <button
-                    type="button"
-                    href="http://www.yahoo.com"
-                    target="_blank"
-                    className="btn btn-secondary"
-                  >
+                  <button type="button" href="http://www.yahoo.com" target="_blank" className="btn btn-secondary">
                     <img src={LinkImg} width={30} />Source
                   </button>
                   <button type="button" className="btn btn-dark">
@@ -215,15 +197,12 @@ function Youtube(props) {
                 </div>
                 <hr />
                 <p className="text-muted">
-                  Kudos (from the Ancient Greek: κῦδος) is acclaim or praise for
-                  exceptional achievement.
+                  Kudos (from the Ancient Greek: κῦδος) is acclaim or praise
+                  for exceptional achievement.
                 </p>
               </div>
 
-
-
-              {props.showComments === true ? (
-                <div>
+              {props.showComments === true ? <div>
                   <div>
                     <h2 className="text-right pauseFont text-muted">
                       ·|comments|·
@@ -235,13 +214,14 @@ function Youtube(props) {
                             <h2 className="tag-title">mediacloner</h2>
                             <hr />
                             <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Curabitur arcu erat, accumsan id imperdiet
-                              et, porttitor at sem. Proin eget tortor risus.Cras
-                              ultricies ligula sed magna dictum porta. Vivamus
-                              magna justo, lacinia eget consectetur sed,
-                              convallis at tellus. Curabitur non nulla sit amet
-                              nisl tempus convallis quis ac lectus.
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipiscing elit. Curabitur arcu erat, accumsan
+                              id imperdiet et, porttitor at sem. Proin eget
+                              tortor risus.Cras ultricies ligula sed magna
+                              dictum porta. Vivamus magna justo, lacinia eget
+                              consectetur sed, convallis at tellus. Curabitur
+                              non nulla sit amet nisl tempus convallis quis ac
+                              lectus.
                             </p>
                             <br />
                             <a href="ppc.html" className="btn btn-info">
@@ -252,13 +232,21 @@ function Youtube(props) {
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                undefined
-              )}
 
-
-
+                  <Form>
+                    <FormGroup row>
+                      <Label for="fullDescription" sm={2}>
+                        Comment:
+                      </Label>
+                      <Col sm={10}>
+                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                      </Col>
+                    </FormGroup>
+                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                      Submit
+                    </Button>
+                  </Form>
+                </div> : undefined}
             </div>
             {/* /.blog-main */}
             <aside className="col-md-4 blog-sidebar">
@@ -286,8 +274,7 @@ function Youtube(props) {
           {/* /.row */}
         </main>
       </div>
-    </div>
-  );
+    </div>;
 }
 
 function Audio(props) {
@@ -376,6 +363,19 @@ function Audio(props) {
                       </div>
                     </div>
                   </div>
+                  <Form>
+                    <FormGroup row>
+                      <Label for="fullDescription" sm={2}>
+                        Comment:
+                      </Label>
+                      <Col sm={10}>
+                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                      </Col>
+                    </FormGroup>
+                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                      Submit
+                    </Button>
+                  </Form>
                 </div>
               ) : (
                 undefined
@@ -495,6 +495,19 @@ function Quote(props) {
                     </div>
                   </div>
                 </div>
+                <Form>
+                    <FormGroup row>
+                      <Label for="fullDescription" sm={2}>
+                        Comment:
+                      </Label>
+                      <Col sm={10}>
+                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                      </Col>
+                    </FormGroup>
+                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                      Submit
+                    </Button>
+                  </Form>
               </div>
             ) : (
               undefined
