@@ -14,16 +14,16 @@ export default class Post extends React.Component {
         super(props);
 
         this.state = {
-            title:'',
-            shortDescription:'',
-            fullDescription:'',
-            owner:'',
-            counterVisits: '',
-            idPostTemplate:'',
-            tag:'',
-            time:'',
-            createAt:'',
-            URL:''
+            title:' ',
+            shortDescription:' ',
+            fullDescription:' ',
+            owner:' ',
+            counterVisits: ' ',
+            idPostTemplate:' ',
+            tag:' ',
+            time:' ',
+            createAt:' ',
+            URL:' '
             }}
     
     componentDidMount=()=>{
@@ -50,16 +50,16 @@ export default class Post extends React.Component {
     render() {
         return (
             <div>
-                {this.state.idPostTemplate == '0'?<Audio/>:undefined}
-                {this.state.idPostTemplate == '1'?<Youtube/>:undefined}
-                {this.state.idPostTemplate == '2'?<Quote list={this.state.posts} header = {this.state.timelineName}/>:undefined}
+                {this.state.idPostTemplate == '0'?<Audio post={this.state}/>:undefined}
+                {this.state.idPostTemplate == '1'?<Youtube post={this.state}/>:undefined}
+                {this.state.idPostTemplate == '2'?<Quote post={this.state} header = {this.state.timelineName}/>:undefined}
             </div>
         );
     }
 }
 
 
-function Youtube() {
+function Youtube(props) {
 
     return (
         <div>
@@ -72,9 +72,9 @@ function Youtube() {
                                 Title of your page of post 
                             </h3>
                             <div className="blog-post">
-                                <strong className="d-inline-block mb-2 text-primary">Developers  </strong>
-                                <h2 className="blog-post-title">How "oldschool" graphics worked in Commodore and Nintendo </h2>
-                                <p className="blog-post-meta">January 1, 2018 by <a href="#">Mediacloner</a></p>
+                                <strong className="d-inline-block mb-2 text-primary">{props.post.tag}</strong>
+                                <h2 className="blog-post-title">{props.post.title} </h2>
+                                <p className="blog-post-meta">{props.post.createAt} <a href="#">Mediacloner</a></p>
                                 <h3>Presentation</h3>
                                 <p>I cover the limitations of color on older 1980's computers and game consoles such as the Nintendo Entertainment System and the Commodore 64.
                                 </p>
@@ -119,7 +119,7 @@ function Youtube() {
     )
 }
 
-function Audio() {
+function Audio(props) {
 
     return (
         <div>
@@ -180,7 +180,7 @@ function Audio() {
     )
 }
 
-function Quote() {
+function Quote(props) {
 
     return (
 
