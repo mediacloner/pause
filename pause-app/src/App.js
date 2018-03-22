@@ -49,6 +49,6 @@ class App extends Component {
     );
   }
 }
-<script src="https://cdn.jsdelivr.net/npm/react-player@1.1.1/lib/ReactPlayer.min.js"></script>
+
 
 export default App;

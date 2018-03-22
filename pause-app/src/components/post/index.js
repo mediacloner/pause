@@ -1,10 +1,10 @@
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, FormText, Container, Media } from 'reactstrap';
 import "../../styles/main.css";
 import KudosImg from "./../../img/kudos_ico_red.svg"
 import LinkImg from "./../../img/link_ico_red.svg"
 import CommentsImg from "./../../img/comments_ico_red.svg"
-import Plyr from 'react-plyr'
+import WaveImg from "./../../img/wave.svg"
 import ApiClient from "../../models/api-client/src/index.js";
 import Moment from 'react-moment';
 import 'moment-timezone'; 
@@ -61,18 +61,17 @@ export default class Post extends React.Component {
             let {title, shortDescription, fullDescription, owner, counterVisits, idPostTemplate, tag, time, createAt, URLpath, kudos} = post.data[0]
            this.setState( { title, shortDescription, fullDescription, owner, counterVisits, idPostTemplate, tag, time, createAt, URLpath, kudos })
     }
-    render() {
+  render() {
         return (
             <div>
-                
-            <Plyr type="youtube"  videoId="CDFN1VatiJA"/>
-
+            
             {this.state.idPostTemplate == '0'?<Audio post={this.state}/>:undefined}
             {this.state.idPostTemplate == '1'?<Youtube post={this.state} youtubeParser={this.youtubeParser}/>:undefined}
             {this.state.idPostTemplate == '2'?<Quote post={this.state} header = {this.state.timelineName}/>:undefined}
         </div>
         );
-    }
+    } 
+
 }
 
 
@@ -158,10 +157,14 @@ function Audio(props) {
                                 <h3>Short Description</h3>
                                 <p>{props.post.shortDescription}</p>
                                 <h3>Audio</h3>
-                                <audio controls>
-                                    <source src="https://media.blubrry.com/ohhhtv/s/ohhhtv.com/podcast/12/s12e10_bilirrubina.mp3" type="audio/mpeg" />
-                                    Your browser does not support the audio element.
+                                <Media left href="#">
+                                <img src={WaveImg}/>
+                                </Media>
+                                <div>
+                                <audio id="myAudio" controls>
+                                <source src={props.post.URLpath + "#t=" + props.post.time }type="audio/mp3" />
                                 </audio>
+                                </div>
                                 <blockquote>
                                 <p>{props.post.fullDescription}</p>
                                 </blockquote>
