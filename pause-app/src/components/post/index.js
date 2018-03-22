@@ -5,8 +5,9 @@ import KudosImg from "./../../img/kudos_ico_red.svg"
 import LinkImg from "./../../img/link_ico_red.svg"
 import CommentsImg from "./../../img/comments_ico_red.svg"
 import ApiClient from "../../models/api-client/src/index.js";
-const apiClient = new ApiClient("http", "localhost", 5000);  
-
+import Moment from 'react-moment';
+import 'moment-timezone'; 
+const apiClient = new ApiClient("http", "localhost", 5000); 
 
 export default class Post extends React.Component {
 
@@ -74,7 +75,9 @@ function Youtube(props) {
                             <div className="blog-post">
                                 <strong className="d-inline-block mb-2 text-primary">{props.post.tag}</strong>
                                 <h2 className="blog-post-title">{props.post.title} </h2>
-                                <p className="blog-post-meta">{props.post.createAt} <a href="#">Mediacloner</a></p>
+                                <p className="blog-post-meta">  <Moment format="DD/MM/YYYY HH:MM ">
+                                {props.post.createAt}</Moment>
+               <a href="#">Mediacloner</a></p>
                                 <h3>Presentation</h3>
                                 <p>I cover the limitations of color on older 1980's computers and game consoles such as the Nintendo Entertainment System and the Commodore 64.
                                 </p>
