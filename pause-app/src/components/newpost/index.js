@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
 import "../../styles/main.css";
 import ApiClient from "../../models/api-client/src/index.js";
+import bodyImg from "./../../img/body.svg"
 
 const apiClient = new ApiClient("http", "localhost", 5000);  
 
@@ -86,7 +87,7 @@ export default class Newpost extends React.Component {
 
 render() {
     return (
-
+      <body background={bodyImg}>
         <div className="container topmed">
         <h2 className="text-right text-center text-secondary pauseFont ">·|new post|·</h2>
         <br/>
@@ -139,10 +140,11 @@ render() {
              <Col sm={10}><Input type="text" onChange={ this.updatePost } name="time" id="time" placeholder="HH:MM:SS" /> 
              </Col>  </FormGroup>):undefined}
 
-            <Button onClick={this.addNewPost}className ='float-right'>Submit</Button>
+            <Button onClick={this.addNewPost}className ='float-right btn-info'>Submit</Button>
 
       </Form>
       </div>
+      </body>
     );
   }
 }
