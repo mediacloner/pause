@@ -4,10 +4,13 @@ import "../../styles/main.css";
 import KudosImg from "./../../img/kudos_ico_red.svg"
 import LinkImg from "./../../img/link_ico_red.svg"
 import CommentsImg from "./../../img/comments_ico_red.svg"
+import Plyr from 'react-plyr'
 import ApiClient from "../../models/api-client/src/index.js";
 import Moment from 'react-moment';
 import 'moment-timezone'; 
 const apiClient = new ApiClient("http", "localhost", 5000); 
+
+
 
 export default class Post extends React.Component {
 
@@ -61,10 +64,13 @@ export default class Post extends React.Component {
     render() {
         return (
             <div>
-                {this.state.idPostTemplate == '0'?<Audio post={this.state}/>:undefined}
-                {this.state.idPostTemplate == '1'?<Youtube post={this.state} youtubeParser={this.youtubeParser}/>:undefined}
-                {this.state.idPostTemplate == '2'?<Quote post={this.state} header = {this.state.timelineName}/>:undefined}
-            </div>
+                
+            <Plyr type="youtube"  videoId="CDFN1VatiJA"/>
+
+            {this.state.idPostTemplate == '0'?<Audio post={this.state}/>:undefined}
+            {this.state.idPostTemplate == '1'?<Youtube post={this.state} youtubeParser={this.youtubeParser}/>:undefined}
+            {this.state.idPostTemplate == '2'?<Quote post={this.state} header = {this.state.timelineName}/>:undefined}
+        </div>
         );
     }
 }
