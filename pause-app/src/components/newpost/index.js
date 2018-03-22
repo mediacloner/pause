@@ -24,12 +24,27 @@ export default class Newpost extends React.Component {
 
       addNewPost = (id) => {
        apiClient
-          .createPost(  this.state.title, this.state.shortDescription, this.state.fullDescription, this.state.owner,this.state.idPostTemplate,this.state.namePostTemplate,this.state.tag, this.state.URLpath, this.state.time)
+          .createPost(  this.state.title, this.state.shortDescription, this.state.fullDescription, this.state.owner,this.state.idPostTemplate,this.state.namePostTemplate,this.state.tag, this.state.URLpath, this.convertToSeconds(this.state.time))
           .then(posts => this.setState({ posts: posts.data }))
           .then (this.props.postResult())
           .catch(console.error)
 
           this.props.postResult()
+      }
+
+      convertToSeconds = (time) => {
+        if (this.IsValidTime (time)){
+        var a = time.split(':')
+        return (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]); }
+
+
+       }
+
+      IsValidTime = (timeString) =>{
+          var pattern = /^(?:2[0-3]|[01]?[0-9]):[0-5][0-9]:[0-5][0-9]$/;
+          if (!timeString.match(pattern))
+              return false;
+          return true;
       }
 
         updatePost = (e) => {
@@ -58,7 +73,6 @@ export default class Newpost extends React.Component {
             break;
 
             case 'URLpath':
-            console.log('yep')
             this.setState({URLpath:e.target.value});
             break;
 
@@ -122,7 +136,7 @@ render() {
 
             {this.state.idPostTemplate != '2'? (<FormGroup row>
              <Label for="exampleTime" sm={2}>Time</Label> 
-             <Col sm={10}><Input type="text" onChange={ this.updatePost } name="time" id="time" placeholder="00:00" /> 
+             <Col sm={10}><Input type="text" onChange={ this.updatePost } name="time" id="time" placeholder="HH:MM:SS" /> 
              </Col>  </FormGroup>):undefined}
 
             <Button onClick={this.addNewPost}className ='float-right'>Submit</Button>
