@@ -37,7 +37,8 @@ export default class Post extends React.Component {
       createAt: " ",
       URLpath: " ",
       showComments: false,
-      comments: []
+      comments: [],
+      newComment:""
     };
   }
 
@@ -51,6 +52,21 @@ export default class Post extends React.Component {
       .catch(console.error);
   };
 
+
+  enableComments = (e) => {
+    console.log('yep')
+    e.preventDefault()
+    this.state.showComments?this.setState({showComments: false}):this.setState({showComments: true})
+   
+ }
+  addNewComment = () => {
+
+        //TODO: Working
+
+
+        //TODO: pop up url onClick={e.preventDefault(window.open(props.URLpath))}
+
+  }
   youtubeParser = url => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
@@ -106,7 +122,11 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
+            newComment={this.state.newComment}
             showComments={this.state.showComments}
+            addNewComment={this.addNewComment}
+            enableComments={this.enableComments}
+
           />
         ) : (
           undefined
@@ -126,7 +146,10 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
+            newComment={this.state.newComment}
             youtubeParser={this.youtubeParser}
+            addNewComment={this.addNewComment}
+            enableComments={this.enableComments}
           />
         ) : (
           undefined
@@ -146,7 +169,10 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
+            newComment={this.state.newComment}
             header={this.state.timelineName}
+            addNewComment={this.addNewComment}
+            enableComments={this.enableComments}
           />
         ) : (
           undefined
@@ -188,10 +214,10 @@ function Youtube(props) {
                   <button type="button" className="btn">
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
-                  <button type="button" href="http://www.yahoo.com" target="_blank" className="btn btn-secondary">
-                    <img src={LinkImg} width={30} />Source
+                  <button type="button"  className="btn btn-secondary" >
+                    <img src={LinkImg}  width={30} />Source
                   </button>
-                  <button type="button" className="btn btn-dark">
+                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
                     <img src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
@@ -239,10 +265,10 @@ function Youtube(props) {
                         Comment:
                       </Label>
                       <Col sm={10}>
-                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
                       </Col>
                     </FormGroup>
-                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                    <Button onClick={props.addNewComment} className="float-right btn-info">
                       Submit
                     </Button>
                   </Form>
@@ -317,10 +343,10 @@ function Audio(props) {
                   <button type="button" className="btn">
                     <img src={KudosImg} width={35} /> {props.kudos} Kudos
                   </button>
-                  <button type="button" className="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary" >
                     <img src={LinkImg} width={35} />Source
                   </button>
-                  <button type="button" className="btn btn-dark">
+                  <button type="button" className="btn btn-dark " onClick={props.enableComments}>
                     <img src={CommentsImg} width={35} />Comments
                   </button>
                 </div>
@@ -369,10 +395,10 @@ function Audio(props) {
                         Comment:
                       </Label>
                       <Col sm={10}>
-                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
                       </Col>
                     </FormGroup>
-                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                    <Button onClick={props.addNewComment} className="float-right btn-info">
                       Submit
                     </Button>
                   </Form>
@@ -449,10 +475,10 @@ function Quote(props) {
                 <button type="button" className="btn">
                   <img src={KudosImg} width={35} /> {props.kudos} Kudos
                 </button>
-                <button type="button" className="btn btn-secondary">
+                <button type="button" className="btn btn-secondary" >
                   <img src={LinkImg} width={35} />Source
                 </button>
-                <button type="button" className="btn btn-dark">
+                <button type="button" className="btn btn-dark" onClick={props.enableComments}>
                   <img src={CommentsImg} width={35} />Comments
                 </button>
               </div>
@@ -501,10 +527,10 @@ function Quote(props) {
                         Comment:
                       </Label>
                       <Col sm={10}>
-                        <Input type="textarea" onChange={this.updatePost} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
                       </Col>
                     </FormGroup>
-                    <Button onClick={this.addNewPost} className="float-right btn-info">
+                    <Button onClick={props.addNewComment} className="float-right btn-info">
                       Submit
                     </Button>
                   </Form>
