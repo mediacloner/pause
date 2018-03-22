@@ -77,7 +77,7 @@ function Youtube(props) {
                                 <h2 className="blog-post-title">{props.post.title} </h2>
                                 <p className="blog-post-meta">  <Moment format="DD/MM/YYYY HH:MM ">
                                 {props.post.createAt}</Moment>
-               <a href="#">Mediacloner</a></p>
+                                <a href="#">Mediacloner</a></p>
                                 <h3>Presentation</h3>
                                 <p>I cover the limitations of color on older 1980's computers and game consoles such as the Nintendo Entertainment System and the Commodore 64.
                                 </p>
