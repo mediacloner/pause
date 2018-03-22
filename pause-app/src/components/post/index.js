@@ -160,7 +160,7 @@ function Audio(props) {
                                 <p>{props.post.fullDescription}</p>
                                 </blockquote>
                                 <div className="btn-group">
-                                    <button type="button" className="btn"><img src={KudosImg} width={35} /> 124 Kudos</button>
+                                    <button type="button" className="btn"><img src={KudosImg} width={35} /> {props.post.kudos} Kudos</button>
                                     <button type="button" className="btn btn-secondary"><img src={LinkImg} width={35} />Source</button>
                                     <button type="button" className="btn btn-dark"><img src={CommentsImg} width={35} />Comments</button>
                                 </div>
@@ -222,7 +222,7 @@ function Quote(props) {
                                 <p>{props.post.fullDescription}</p>
                             </blockquote>
                             <div className="btn-group">
-                                <button type="button" className="btn"><img src={KudosImg} width={35} /> 124 Kudos</button>
+                                <button type="button" className="btn"><img src={KudosImg} width={35} />  {props.post.kudos} Kudos</button>
                                 <button type="button" className="btn btn-secondary"><img src={LinkImg} width={35} />Source</button>
                                 <button type="button" className="btn btn-dark"><img src={CommentsImg} width={35} />Comments</button> 
                             </div>
