@@ -229,11 +229,13 @@ function Youtube(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo}>
+                  <button type="button" className="btn">
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
-                  <button type="button"  className="btn btn-secondary" >
+                  <button type="button"  className="btn btn-secondary">
+                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
                     <img src={LinkImg}  width={30} />Source
+                  </a>
                   </button>
                   <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
                     <img src={CommentsImg} width={30} />Discuss
@@ -359,13 +361,15 @@ function Audio(props) {
                 </blockquote>
                 <div className="btn-group">
                   <button type="button" className="btn">
-                    <img src={KudosImg} width={35} /> {props.kudos} Kudos
+                    <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
-                  <button type="button" className="btn btn-secondary" >
-                    <img src={LinkImg} width={35} />Source
+                  <button type="button"  className="btn btn-secondary">
+                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
+                    <img src={LinkImg}  width={30} />Source
+                  </a>
                   </button>
-                  <button type="button" className="btn btn-dark " onClick={props.enableComments}>
-                    <img src={CommentsImg} width={35} />Comments
+                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
+                    <img src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
                 <hr />
@@ -490,16 +494,18 @@ function Quote(props) {
                 <p>{props.fullDescription}</p>
               </blockquote>
               <div className="btn-group">
-                <button type="button" className="btn">
-                  <img src={KudosImg} width={35} /> {props.kudos} Kudos
-                </button>
-                <button type="button" className="btn btn-secondary" >
-                  <img src={LinkImg} width={35} />Source
-                </button>
-                <button type="button" className="btn btn-dark" onClick={props.enableComments}>
-                  <img src={CommentsImg} width={35} />Comments
-                </button>
-              </div>
+                  <button type="button" className="btn">
+                    <img src={KudosImg} /> {props.kudos} Kudos
+                  </button>
+                  <button type="button"  className="btn btn-secondary">
+                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
+                    <img src={LinkImg}  width={30} />Source
+                  </a>
+                  </button>
+                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
+                    <img src={CommentsImg} width={30} />Discuss
+                  </button>
+                </div>
               <hr />
               <p className="text-muted">
                 Kudos (from the Ancient Greek: κῦδος) is acclaim or praise for

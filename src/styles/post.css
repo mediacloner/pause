@@ -34,6 +34,15 @@
     overflow-y: hidden;
   }
   
+
+  .urlButton { 
+    text-decoration: 'none'!important;
+    color: #fffefe;
+  }
+  .urlButton:hover { 
+    text-decoration: 'none'!important;
+    color: #fffefe;
+  }
   .nav-scroller .nav {
     display: -webkit-box;
     display: -ms-flexbox;
