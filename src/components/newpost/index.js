@@ -1,10 +1,12 @@
 import React from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
 import "../../styles/main.css";
-import ApiClient from "../../models/api-client/src/index.js";
+
 import bodyImg from "./../../img/body.svg"
 
-const apiClient = new ApiClient("http", "localhost", 5000);  
+
+import apiClient from "./../../api-config"
+
 
 export default class Newpost extends React.Component {
 

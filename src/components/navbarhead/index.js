@@ -9,9 +9,9 @@ import "../../styles/main.css";
 import Timeline from '../../components/timeline'
 import Newpost from '../../components/newpost'
 import Post from '../../components/post'
-import ApiClient from "../../models/api-client/src/index.js";
 
-const apiClient = new ApiClient("http", "localhost", 5000);  
+import apiClient from "./../../api-config"
+
 
 export default class NavbarHead extends React.Component {
 

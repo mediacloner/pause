@@ -15,10 +15,21 @@ import KudosImg from "./../../img/kudos_ico_red.svg";
 import LinkImg from "./../../img/link_ico_red.svg";
 import CommentsImg from "./../../img/comments_ico_red.svg";
 import WaveImg from "./../../img/wave.svg";
-import ApiClient from "../../models/api-client/src/index.js";
 import Moment from "react-moment";
 import "moment-timezone";
-const apiClient = new ApiClient("http", "localhost", 5000);
+import apiClient from "./../../api-config"
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -72,12 +83,12 @@ export default class Post extends React.Component {
   addKudo = (id)=> {
 
     console.log(this.state.counterKudos, this.state.id, id);
-/*       if (this.state.counterKudos < 5){
-        ApiClient.addKudo(this.state.id)
+      if (this.state.counterKudos < 5){
+        apiClient.addKudo(this.state.id)
         .then(kudos => {
           console.log(this.state.counterKudos, this.state.id);
         })
-        .catch(console.error); */
+        .catch(console.error);
 
       }  
 
@@ -363,7 +374,7 @@ function Audio(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
+                    <button type="button" className="btn" onClick={props.addKudo(props.id)}>
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
