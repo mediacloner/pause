@@ -72,12 +72,12 @@ export default class Post extends React.Component {
   addKudo = (id)=> {
 
     console.log(this.state.counterKudos, this.state.id, id);
-      if (this.state.counterKudos < 5){
+/*       if (this.state.counterKudos < 5){
         ApiClient.addKudo(this.state.id)
         .then(kudos => {
           console.log(this.state.counterKudos, this.state.id);
         })
-        .catch(console.error);
+        .catch(console.error); */
 
       }  
 
