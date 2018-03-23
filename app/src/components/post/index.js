@@ -17,7 +17,7 @@ import CommentsImg from "./../../img/comments_ico_red.svg";
 import WaveImg from "./../../img/wave.svg";
 import Moment from "react-moment";
 import "moment-timezone";
-import apiClient from "./../../api-config"
+import apiClient from "../../services/api-config"
 
 
 export default class Post extends React.Component {

@@ -1,15 +1,21 @@
+require('dotenv').config()
 const axios = require('axios')
 const url = require('url')
 
-const api = {
-    baseUrl: `${this.protocol}://${this.host}:${this.port}/api/`,
+const apiClient = {
+   /*  baseUrl: ()=>{
+        return `${this.protocol}://${this.host}:${this.port}/api/`
+    }, */
+/*    baseUrl: `http://localhost:5000/api/`, */
+
+baseUrl: "https://cryptic-bayou-64395.herokuapp.com/api/",
 
  /*  
     login(username, password) {
         return this._call('post', 'login', { username, password })
     } */
     
-    listPosts() {
+    listPosts: ()=> {
         return data(axios.get(url.resolve(this.baseUrl, 'list')))
     },
 
@@ -61,4 +67,4 @@ function data(resp) {
     return resp.then(res => res.data)
 }
 
-module.exports = api
+module.exports = apiClient

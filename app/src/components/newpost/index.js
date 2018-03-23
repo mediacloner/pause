@@ -5,7 +5,7 @@ import "../../styles/main.css";
 import bodyImg from "./../../img/body.svg"
 
 
-import apiClient from "./../../api-config"
+import apiClient from "../../services/api-config"
 
 
 export default class Newpost extends React.Component {

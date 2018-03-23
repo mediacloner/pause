@@ -10,7 +10,8 @@ import Timeline from '../../components/timeline'
 import Newpost from '../../components/newpost'
 import Post from '../../components/post'
 
-import apiClient from "./../../api-config"
+import apiClient from "../../services/api-config"
+
 
 
 export default class NavbarHead extends React.Component {

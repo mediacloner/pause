@@ -2,7 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-import apiClient from "./../../api-config"
+import apiClient from "../../services/api-config"
+
 
 
 
