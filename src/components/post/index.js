@@ -56,7 +56,6 @@ export default class Post extends React.Component {
 
 
   enableComments = (e) => {
-    console.log('yep')
     e.preventDefault()
     this.state.showComments?this.setState({showComments: false}):this.setState({showComments: true})
    
@@ -66,16 +65,17 @@ export default class Post extends React.Component {
         //TODO: Working
 
 
-        //TODO: pop up url onClick={e.preventDefault(window.open(props.URLpath))}
 
   }
 
 
   addKudo = (id)=> {
+
+    console.log(this.state.counterKudos, this.state.id, id);
       if (this.state.counterKudos < 5){
         ApiClient.addKudo(this.state.id)
         .then(kudos => {
-          console.log(kudos);
+          console.log(this.state.counterKudos, this.state.id);
         })
         .catch(console.error);
 
@@ -127,6 +127,7 @@ export default class Post extends React.Component {
       <div>
         {this.state.idPostTemplate == "0" ? (
           <Audio
+            id={this.state.id}
             title={this.state.title}
             shortDescription={this.state.shortDescription}
             fullDescription={this.state.fullDescription}
@@ -151,6 +152,7 @@ export default class Post extends React.Component {
         )}
         {this.state.idPostTemplate == "1" ? (
           <Youtube
+            id={this.state.id}
             title={this.state.title}
             shortDescription={this.state.shortDescription}
             fullDescription={this.state.fullDescription}
@@ -174,6 +176,7 @@ export default class Post extends React.Component {
         )}
         {this.state.idPostTemplate == "2" ? (
           <Quote
+            id={this.state.id}
             title={this.state.title}
             shortDescription={this.state.shortDescription}
             fullDescription={this.state.fullDescription}
@@ -229,7 +232,7 @@ function Youtube(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn">
+                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
@@ -360,7 +363,7 @@ function Audio(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn">
+                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
@@ -494,7 +497,7 @@ function Quote(props) {
                 <p>{props.fullDescription}</p>
               </blockquote>
               <div className="btn-group">
-                  <button type="button" className="btn">
+                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
