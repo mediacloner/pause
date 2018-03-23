@@ -30,7 +30,9 @@ class ApiClient {
         return data(axios.get(url.resolve(this.baseUrl, `search/${word}`)))
     }
   
-
+    addKudo (id) {
+        return data(axios.put(url.resolve(this.baseUrl, `kudos/${id}`)))
+    }
     retrievePost (id) {
         return data(axios.get(url.resolve(this.baseUrl, `post/${id}`)))
     }

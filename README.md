@@ -10,39 +10,39 @@
 
 ### Landing Page
 
-![Landing Page](./DocSrc/landingPage.png)
+![Landing Page](./doc/landingPage.png)
 
 ### Sign In Page
 
-![Sign In Page](./DocSrc/signinPage.png)
+![Sign In Page](./doc/signinPage.png)
 ### YouTube Post
 
-![Youtube Post](./DocSrc/youtubePost.png)
+![Youtube Post](./doc/youtubePost.png)
 
 ### Timeline
 
-![Timeline](./DocSrc/audioBlogPost.png)
+![Timeline](./doc/audioBlogPost.png)
 
 
 ## Data Model
 
 
-![Data Model](./DocSrc/dataModelv2.png)
+![Data Model](./doc/dataModelv2.png)
 
 
 ## Logo
 
  Lightweight logo created with one Google Font that can integrate easily anywhere.
 
-![Google Fonts](./DocSrc/logos/pauseLogo.png)
+![Google Fonts](./doc/logos/pauseLogo.png)
 
 ### Logo
 
-![Logo](./DocSrc/logos/pause.png)
+![Logo](./doc/logos/pause.png)
 
 ### Short Logo
 
-![Short Logo](./DocSrc/logos/shortlogo.png)
+![Short Logo](./doc/logos/shortlogo.png)
 
 
 # Kanban
@@ -51,16 +51,16 @@
 
 
 ## Trello
-![Trello](./DocSrc/trello.png)
+![Trello](./doc/trello.png)
 
 ## Gantt
 
-![Gantt](./DocSrc/gantt.png)
+![Gantt](./doc/gantt.png)
 
 
 ## Calendar
 
-![Calendar](./DocSrc/calendar.png)
+![Calendar](./doc/calendar.png)
 
 
 # API

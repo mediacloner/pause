@@ -25,6 +25,7 @@ export default class Post extends React.Component {
     super(props);
 
     this.state = {
+      id: 0,
       title: " ",
       shortDescription: " ",
       fullDescription: " ",
@@ -38,7 +39,8 @@ export default class Post extends React.Component {
       URLpath: " ",
       showComments: false,
       comments: [],
-      newComment:""
+      newComment:"",
+      counterKudos:""
     };
   }
 
@@ -67,6 +69,19 @@ export default class Post extends React.Component {
         //TODO: pop up url onClick={e.preventDefault(window.open(props.URLpath))}
 
   }
+
+
+  addKudo = (id)=> {
+      if (this.state.counterKudos < 5){
+        ApiClient.addKudo(this.state.id)
+        .then(kudos => {
+          console.log(kudos);
+        })
+        .catch(console.error);
+
+      }  
+
+}
   youtubeParser = url => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
@@ -79,6 +94,7 @@ export default class Post extends React.Component {
   };
   handleFillResult = post => {
     let {
+      _id, // test
       title,
       shortDescription,
       fullDescription,
@@ -92,6 +108,7 @@ export default class Post extends React.Component {
       kudos
     } = post.data[0];
     this.setState({
+      id:_id, //test
       title,
       shortDescription,
       fullDescription,
@@ -125,6 +142,7 @@ export default class Post extends React.Component {
             newComment={this.state.newComment}
             showComments={this.state.showComments}
             addNewComment={this.addNewComment}
+            addKudo={this.addKudo}
             enableComments={this.enableComments}
 
           />
@@ -211,7 +229,7 @@ function Youtube(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn">
+                  <button type="button" className="btn" onClick={props.addKudo}>
                     <img src={KudosImg} /> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary" >
