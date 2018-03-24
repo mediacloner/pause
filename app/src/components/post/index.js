@@ -295,22 +295,13 @@ function Youtube(props) {
                               <div className="col blog-main text-center">
                                 <div className="box">
                                 <div className="box-content" >
-                                  <h2 className="tag-title">mediacloner</h2>
+                                  <h2 className="tag-title">mediacloner {comment.userId}</h2>
                                   <hr />
                                   <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Curabitur arcu erat, accumsan
-                                    id imperdiet et, porttitor at sem. Proin eget
-                                    tortor risus.Cras ultricies ligula sed magna
-                                    dictum porta. Vivamus magna justo, lacinia eget
-                                    consectetur sed, convallis at tellus. Curabitur
-                                    non nulla sit amet nisl tempus convallis quis ac
-                                    lectus.
+                                  {comment.comment}
                                   </p>
                                   <br />
-                                  <a href="ppc.html" className="btn btn-info">
-                                    User Timeline
-                                  </a>
+                              
                                 </div>
                               </div>
                             </div>
