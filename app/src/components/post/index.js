@@ -56,11 +56,24 @@ export default class Post extends React.Component {
     this.state.showComments?this.setState({showComments: false}):this.setState({showComments: true})
    
  }
+
+
+ newComment = (e) =>{
+   this.setState({newComment:e.target.value});
+
+ }
+
   addNewComment = () => {
 
-        //TODO: Working
+    console.log
 
-
+    apiClient
+    .createComment( this.state.id, "5aafaa281ca9687a2d6bb1b4", this.state.newComment)
+    .then(() => {
+      this.retrievePost(this.props.postId)
+    })
+    .catch(console.error);
+ 
 
   }
 
@@ -70,30 +83,21 @@ export default class Post extends React.Component {
     .then(post => {
       return this.handleFillResult(post);
     })
-    //.then (this.props.postResult())
     .catch(console.error);
 
   };
- 
-
 
 
   addKudo = (e)=> {
-
-
-
       if (this.state.counterKudos < 5){
 
         apiClient.addKudo(this.state.id)
         .then(() => {
             this.setState({counterKudos: this.state.counterKudos+1})
-
         })
         .then(() => {
-
           this.retrievePost(this.props.postId)
         })
-
         .catch(console.error); 
 
       }
@@ -114,7 +118,7 @@ export default class Post extends React.Component {
   };
   handleFillResult = post => {
     let {
-      _id, // test
+      _id,
       title,
       shortDescription,
       fullDescription,
@@ -123,6 +127,7 @@ export default class Post extends React.Component {
       idPostTemplate,
       tag,
       time,
+      comments,
       createAt,
       URLpath,
       kudos
@@ -137,6 +142,7 @@ export default class Post extends React.Component {
       idPostTemplate,
       tag,
       time,
+      comments,
       createAt,
       URLpath,
       kudos
@@ -160,7 +166,7 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
-            newComment={this.state.newComment}
+            newComment={this.newComment}
             showComments={this.state.showComments}
             addNewComment={this.addNewComment}
             addKudo={this.addKudo}
@@ -187,7 +193,7 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
-            newComment={this.state.newComment}
+            newComment={this.newComment}
             youtubeParser={this.youtubeParser}
             addNewComment={this.addNewComment}
             addKudo={this.addKudo}
@@ -213,7 +219,7 @@ export default class Post extends React.Component {
             URLpath={this.state.URLpath}
             kudos={this.state.kudos}
             comments={this.state.comments}
-            newComment={this.state.newComment}
+            newComment={this.newComment}
             header={this.state.timelineName}
             addNewComment={this.addNewComment}
             counterKudos={this.state.counterKudos}
@@ -275,37 +281,49 @@ function Youtube(props) {
                 </p>
               </div>
 
-              {props.showComments === true ? <div>
+              {props.showComments === true ? 
+                        
+              <div>
                   <div>
                     <h2 className="text-right pauseFont text-muted">
                       ·|comments|·
                     </h2>
-                    <div className="row">
-                      <div className="col blog-main text-center">
-                        <div className="box">
-                          <div className="box-content">
-                            <h2 className="tag-title">mediacloner</h2>
-                            <hr />
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipiscing elit. Curabitur arcu erat, accumsan
-                              id imperdiet et, porttitor at sem. Proin eget
-                              tortor risus.Cras ultricies ligula sed magna
-                              dictum porta. Vivamus magna justo, lacinia eget
-                              consectetur sed, convallis at tellus. Curabitur
-                              non nulla sit amet nisl tempus convallis quis ac
-                              lectus.
-                            </p>
-                            <br />
-                            <a href="ppc.html" className="btn btn-info">
-                              User Timeline
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+              
+                    {props.comments.map((post, index) => {
+                          return (
+                            <div className="row">
+                              <div className="col blog-main text-center">
+                                <div className="box">
+                                <div className="box-content">
+                                  <h2 className="tag-title">mediacloner</h2>
+                                  <hr />
+                                  <p>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Curabitur arcu erat, accumsan
+                                    id imperdiet et, porttitor at sem. Proin eget
+                                    tortor risus.Cras ultricies ligula sed magna
+                                    dictum porta. Vivamus magna justo, lacinia eget
+                                    consectetur sed, convallis at tellus. Curabitur
+                                    non nulla sit amet nisl tempus convallis quis ac
+                                    lectus.
+                                  </p>
+                                  <br />
+                                  <a href="ppc.html" className="btn btn-info">
+                                    User Timeline
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                          )
+                        }
+                      )
+                    }
+              
+                      
+              </div>   
+              
+              <hr/>
                   <Form>
                     <FormGroup row>
                       <Label for="fullDescription" sm={2}>
@@ -406,59 +424,64 @@ function Audio(props) {
                 </p>
               </div>
           
-
-
-              {props.showComments === true ? (
-                <div>
-                  <div>
-                    <h2 className="text-right pauseFont text-muted">
-                      ·|comments|·
-                    </h2>
-                    <div className="row">
-                      <div className="col blog-main text-center">
-                        <div className="box">
-                          <div className="box-content">
-                            <h2 className="tag-title">mediacloner</h2>
-                            <hr />
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Curabitur arcu erat, accumsan id imperdiet
-                              et, porttitor at sem. Proin eget tortor risus.Cras
-                              ultricies ligula sed magna dictum porta. Vivamus
-                              magna justo, lacinia eget consectetur sed,
-                              convallis at tellus. Curabitur non nulla sit amet
-                              nisl tempus convallis quis ac lectus.
-                            </p>
-                            <br />
-                            <a href="ppc.html" className="btn btn-info">
-                              User Timeline
-                            </a>
-                          </div>
-                        </div>
+              {props.showComments === true ? 
+                        
+                        <div>
+                            <div>
+                              <h2 className="text-right pauseFont text-muted">
+                                ·|comments|·
+                              </h2>
+                        
+                              {props.comments.map((post, index) => {
+                                    return (
+                                      <div className="row">
+                                        <div className="col blog-main text-center">
+                                          <div className="box">
+                                          <div className="box-content">
+                                            <h2 className="tag-title">mediacloner</h2>
+                                            <hr />
+                                            <p>
+                                              Lorem ipsum dolor sit amet, consectetur
+                                              adipiscing elit. Curabitur arcu erat, accumsan
+                                              id imperdiet et, porttitor at sem. Proin eget
+                                              tortor risus.Cras ultricies ligula sed magna
+                                              dictum porta. Vivamus magna justo, lacinia eget
+                                              consectetur sed, convallis at tellus. Curabitur
+                                              non nulla sit amet nisl tempus convallis quis ac
+                                              lectus.
+                                            </p>
+                                            <br />
+                                            <a href="ppc.html" className="btn btn-info">
+                                              User Timeline
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </div>
+                                    )
+                                  }
+                                )
+                              }
+                        
+                                
+                        </div>   
+                        
+                        <hr/>
+                            <Form>
+                              <FormGroup row>
+                                <Label for="fullDescription" sm={2}>
+                                  Comment:
+                                </Label>
+                                <Col sm={10}>
+                                  <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                                </Col>
+                              </FormGroup>
+                              <Button onClick={props.addNewComment} className="float-right btn-info">
+                                Submit
+                              </Button>
+                            </Form>
+                          </div> : undefined}
                       </div>
-                    </div>
-                  </div>
-                  <Form>
-                    <FormGroup row>
-                      <Label for="fullDescription" sm={2}>
-                        Comment:
-                      </Label>
-                      <Col sm={10}>
-                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
-                      </Col>
-                    </FormGroup>
-                    <Button onClick={props.addNewComment} className="float-right btn-info">
-                      Submit
-                    </Button>
-                  </Form>
-                </div>
-              ) : (
-                undefined
-              )}
-
-
-
-            </div>
             {/* /.blog-main */}
 
             <aside className="col-md-4 blog-sidebar">
@@ -539,58 +562,64 @@ function Quote(props) {
                 exceptional achievement.
               </p>
             </div>
-
-
-
-            {props.showComments === true ? (
-              <div>
-                <div>
-                  <h2 className="text-right pauseFont text-muted">
-                    ·|comments|·
-                  </h2>
-                  <div className="row">
-                    <div className="col blog-main text-center">
-                      <div className="box">
-                        <div className="box-content">
-                          <h2 className="tag-title">mediacloner</h2>
-                          <hr />
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Curabitur arcu erat, accumsan id imperdiet et,
-                            porttitor at sem. Proin eget tortor risus.Cras
-                            ultricies ligula sed magna dictum porta. Vivamus
-                            magna justo, lacinia eget consectetur sed, convallis
-                            at tellus. Curabitur non nulla sit amet nisl tempus
-                            convallis quis ac lectus.
-                          </p>
-                          <br />
-                          <a href="ppc.html" className="btn btn-info">
-                            User Timeline
-                          </a>
-                        </div>
+            {props.showComments === true ? 
+                        
+                        <div>
+                            <div>
+                              <h2 className="text-right pauseFont text-muted">
+                                ·|comments|·
+                              </h2>
+                        
+                              {props.comments.map((post, index) => {
+                                    return (
+                                      <div className="row">
+                                        <div className="col blog-main text-center">
+                                          <div className="box">
+                                          <div className="box-content">
+                                            <h2 className="tag-title">mediacloner</h2>
+                                            <hr />
+                                            <p>
+                                              Lorem ipsum dolor sit amet, consectetur
+                                              adipiscing elit. Curabitur arcu erat, accumsan
+                                              id imperdiet et, porttitor at sem. Proin eget
+                                              tortor risus.Cras ultricies ligula sed magna
+                                              dictum porta. Vivamus magna justo, lacinia eget
+                                              consectetur sed, convallis at tellus. Curabitur
+                                              non nulla sit amet nisl tempus convallis quis ac
+                                              lectus.
+                                            </p>
+                                            <br />
+                                            <a href="ppc.html" className="btn btn-info">
+                                              User Timeline
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </div>
+                                    )
+                                  }
+                                )
+                              }
+                        
+                                
+                        </div>   
+                        
+                        <hr/>
+                            <Form>
+                              <FormGroup row>
+                                <Label for="fullDescription" sm={2}>
+                                  Comment:
+                                </Label>
+                                <Col sm={10}>
+                                  <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                                </Col>
+                              </FormGroup>
+                              <Button onClick={props.addNewComment} className="float-right btn-info">
+                                Submit
+                              </Button>
+                            </Form>
+                          </div> : undefined}
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <Form>
-                    <FormGroup row>
-                      <Label for="fullDescription" sm={2}>
-                        Comment:
-                      </Label>
-                      <Col sm={10}>
-                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
-                      </Col>
-                    </FormGroup>
-                    <Button onClick={props.addNewComment} className="float-right btn-info">
-                      Submit
-                    </Button>
-                  </Form>
-              </div>
-            ) : (
-              undefined
-            )}
-
-          </div>
           {/* /.blog-main */}
           <aside className="col-md-4 blog-sidebar">
             <div className="p-3 mb-3 bg-light rounded">

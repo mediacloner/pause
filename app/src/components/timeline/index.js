@@ -6,7 +6,7 @@ export default class Timeline extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
+    posts: [],
     }
   }
 
