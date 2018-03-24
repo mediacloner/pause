@@ -8,10 +8,10 @@ var apiClient = {
     /*  baseUrl: ()=>{
          return `${this.protocol}://${this.host}:${this.port}/api/`
      }, */
-    /*    baseUrl: `http://localhost:5000/api/`, */
+       baseUrl: `http://localhost:5000/api/`,
 
-    baseUrl: "https://cryptic-bayou-64395.herokuapp.com/api/",
-
+/*     baseUrl: "https://cryptic-bayou-64395.herokuapp.com/api/",
+ */
     /*  
        login(username, password) {
            return this._call('post', 'login', { username, password })

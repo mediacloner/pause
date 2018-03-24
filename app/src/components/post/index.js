@@ -169,6 +169,7 @@ export default class Post extends React.Component {
             newComment={this.state.newComment}
             youtubeParser={this.youtubeParser}
             addNewComment={this.addNewComment}
+            addKudo={this.addKudo}
             enableComments={this.enableComments}
           />
         ) : (
@@ -232,8 +233,8 @@ function Youtube(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
-                    <img src={KudosImg} /> {props.kudos} Kudos
+                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>  
+                    <img src={KudosImg}/> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
                   <a className="urlButton" href={props.URLpath} target={'_blank'} >

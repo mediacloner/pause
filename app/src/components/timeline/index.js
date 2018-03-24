@@ -1,11 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-
 import apiClient from "../../services/api-config"
-
-
-
 
 export default class Timeline extends React.Component {
   constructor(props) {
