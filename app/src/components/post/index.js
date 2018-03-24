@@ -18,8 +18,7 @@ import CommentsImg from "./../../img/comments.svg";
 import WaveImg from "./../../img/wave.svg";
 import Moment from "react-moment";
 import "moment-timezone";
-import apiClient from "../../services/api-config"
-
+import apiClient from "../../services/api-config";
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -40,71 +39,63 @@ export default class Post extends React.Component {
       URLpath: " ",
       showComments: false,
       comments: [],
-      newComment:"",
+      newComment: "",
       counterKudos: 0
     };
   }
 
-
   componentDidMount = () => {
-    this.retrievePost(this.props.postId)
+    this.retrievePost(this.props.postId);
   };
-  
 
-  enableComments = (e) => {
-    e.preventDefault()
-    this.state.showComments?this.setState({showComments: false}):this.setState({showComments: true})
-   
- }
+  enableComments = e => {
+    e.preventDefault();
+    this.state.showComments
+      ? this.setState({ showComments: false })
+      : this.setState({ showComments: true });
+  };
 
-
- newComment = (e) =>{
-   this.setState({newComment:e.target.value});
-
- }
+  newComment = e => {
+    this.setState({ newComment: e.target.value });
+  };
 
   addNewComment = () => {
-
-    console.log
+    console.log;
 
     apiClient
-    .createComment( this.state.id, "5aafaa281ca9687a2d6bb1b4", this.state.newComment)
-    .then(() => {
-      this.retrievePost(this.props.postId)
-    })
-    .catch(console.error);
- 
-
-  }
-
-  retrievePost = (postId) =>{
-    apiClient
-    .retrievePost(postId)
-    .then(post => {
-      return this.handleFillResult(post);
-    })
-    .catch(console.error);
-
+      .createComment(
+        this.state.id,
+        "5aafaa281ca9687a2d6bb1b4",
+        this.state.newComment
+      )
+      .then(() => {
+        this.retrievePost(this.props.postId);
+      })
+      .catch(console.error);
   };
 
+  retrievePost = postId => {
+    apiClient
+      .retrievePost(postId)
+      .then(post => {
+        return this.handleFillResult(post);
+      })
+      .catch(console.error);
+  };
 
-  addKudo = (e)=> {
-      if (this.state.counterKudos < 5){
-
-        apiClient.addKudo(this.state.id)
+  addKudo = e => {
+    if (this.state.counterKudos < 5) {
+      apiClient
+        .addKudo(this.state.id)
         .then(() => {
-            this.setState({counterKudos: this.state.counterKudos+1})
+          this.setState({ counterKudos: this.state.counterKudos + 1 });
         })
         .then(() => {
-          this.retrievePost(this.props.postId)
+          this.retrievePost(this.props.postId);
         })
-        .catch(console.error); 
-
-      }
-
-
-      } ; 
-
+        .catch(console.error);
+    }
+  };
 
   youtubeParser = url => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
@@ -133,7 +124,7 @@ export default class Post extends React.Component {
       kudos
     } = post.data[0];
     this.setState({
-      id:_id, //test
+      id: _id, //test
       title,
       shortDescription,
       fullDescription,
@@ -172,7 +163,6 @@ export default class Post extends React.Component {
             addKudo={this.addKudo}
             counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
-
           />
         ) : (
           undefined
@@ -234,7 +224,8 @@ export default class Post extends React.Component {
 }
 
 function Youtube(props) {
-  return <div>
+  return (
+    <div>
       <div>
         <main role="main" className="container topmed">
           <div className="row">
@@ -256,79 +247,106 @@ function Youtube(props) {
                 <p>{props.shortDescription}</p>
                 <h3>Video</h3>
                 <div className="embed-responsive embed-responsive-16by9">
-                  <iframe width={560} height={315} src={"https://www.youtube.com/embed/" + props.youtubeParser(props.URLpath) + "?start=" + props.time} frameBorder={0} allow="autoplay; encrypted-media" allowFullScreen />
+                  <iframe
+                    width={560}
+                    height={315}
+                    src={
+                      "https://www.youtube.com/embed/" +
+                      props.youtubeParser(props.URLpath) +
+                      "?start=" +
+                      props.time
+                    }
+                    frameBorder={0}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
                 </div>
                 <blockquote>
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo}>  
-                    <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold} width={30}/> {props.kudos} Kudos
+                  <button type="button" className="btn" onClick={props.addKudo}>
+                    <img
+                      src={props.counterKudos < 5 ? KudosImg : KudosImgGold}
+                      width={30}
+                    />{" "}
+                    {props.kudos} Kudos
                   </button>
-                  <button type="button"  className="btn btn-secondary">
-                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
-                    <img src={LinkImg}  width={30} />Source
-                  </a>
+                  <button type="button" className="btn btn-secondary">
+                    <a
+                      className="urlButton"
+                      href={props.URLpath}
+                      target={"_blank"}
+                    >
+                      <img src={LinkImg} width={30} />Source
+                    </a>
                   </button>
-                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    onClick={props.enableComments}
+                  >
                     <img src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
                 <hr />
                 <p className="text-muted">
-                  Kudos (from the Ancient Greek: κῦδος) is acclaim or praise
-                  for exceptional achievement.
+                  Kudos (from the Ancient Greek: κῦδος) is acclaim or praise for
+                  exceptional achievement.
                 </p>
               </div>
 
-              {props.showComments === true ? 
-                        
-              <div>
+              {props.showComments === true ? (
+                <div>
                   <div>
                     <h2 className="text-right pauseFont text-muted">
                       ·|comments|·
                     </h2>
-              
+
                     {props.comments.map((comment, index) => {
-                          return (
-                            <div className="row" key ={comment._id}>
-                              <div className="col blog-main text-center">
-                                <div className="box">
-                                <div className="box-content" >
-                                  <h2 className="tag-title">mediacloner {comment.userId}</h2>
-                                  <hr />
-                                  <p>
-                                  {comment.comment}
-                                  </p>
-                                  <br />
-                              
-                                </div>
+                      return (
+                        <div className="row" key={comment._id}>
+                          <div className="col blog-main text-center">
+                            <div className="box">
+                              <div className="box-content">
+                                <h2 className="tag-title">
+                                  {comment.userId.username}
+                                </h2>
+                                <hr />
+                                <p>{comment.comment}</p>
+                                <br />
                               </div>
                             </div>
-                            </div>
-                          )
-                        }
-                      )
-                    }
-              
-                      
-              </div>   
-              
-              <hr/>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <hr />
                   <Form>
                     <FormGroup row>
-                      <Label for="fullDescription" sm={2}>
-                        Comment:
-                      </Label>
-                      <Col sm={10}>
-                        <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
+                      <Col>
+                        <Input
+                          type="textarea"
+                          onChange={props.newComment}
+                          name="fullDescription"
+                          id="fullDescription"
+                          placeholder="write the description that could you see from the post "
+                        />
                       </Col>
                     </FormGroup>
-                    <Button onClick={props.addNewComment} className="float-right btn-info">
+                    <Button
+                      onClick={props.addNewComment}
+                      className="float-right btn-info"
+                    >
                       Submit
                     </Button>
                   </Form>
-                </div> : undefined}
+                </div>
+              ) : (
+                undefined
+              )}
             </div>
             {/* /.blog-main */}
             <aside className="col-md-4 blog-sidebar">
@@ -356,7 +374,8 @@ function Youtube(props) {
           {/* /.row */}
         </main>
       </div>
-    </div>;
+    </div>
+  );
 }
 
 function Audio(props) {
@@ -396,15 +415,26 @@ function Audio(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                    <button type="button" className="btn" onClick={props.addKudo}>
-                    <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold}/> {props.kudos} Kudos
+                  <button type="button" className="btn" onClick={props.addKudo}>
+                    <img
+                      src={props.counterKudos < 5 ? KudosImg : KudosImgGold}
+                    />{" "}
+                    {props.kudos} Kudos
                   </button>
-                  <button type="button"  className="btn btn-secondary">
-                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
-                    <img src={LinkImg}  width={30} />Source
-                  </a>
+                  <button type="button" className="btn btn-secondary">
+                    <a
+                      className="urlButton"
+                      href={props.URLpath}
+                      target={"_blank"}
+                    >
+                      <img src={LinkImg} width={30} />Source
+                    </a>
                   </button>
-                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    onClick={props.enableComments}
+                  >
                     <img src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
@@ -414,65 +444,59 @@ function Audio(props) {
                   exceptional achievement.
                 </p>
               </div>
-          
-              {props.showComments === true ? 
-                        
-                        <div>
-                            <div>
-                              <h2 className="text-right pauseFont text-muted">
-                                ·|comments|·
-                              </h2>
-                        
-                              {props.comments.map((post, index) => {
-                                    return (
-                                      <div className="row">
-                                        <div className="col blog-main text-center">
-                                          <div className="box">
-                                          <div className="box-content">
-                                            <h2 className="tag-title">mediacloner</h2>
-                                            <hr />
-                                            <p>
-                                              Lorem ipsum dolor sit amet, consectetur
-                                              adipiscing elit. Curabitur arcu erat, accumsan
-                                              id imperdiet et, porttitor at sem. Proin eget
-                                              tortor risus.Cras ultricies ligula sed magna
-                                              dictum porta. Vivamus magna justo, lacinia eget
-                                              consectetur sed, convallis at tellus. Curabitur
-                                              non nulla sit amet nisl tempus convallis quis ac
-                                              lectus.
-                                            </p>
-                                            <br />
-                                            <a href="ppc.html" className="btn btn-info">
-                                              User Timeline
-                                            </a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      </div>
-                                    )
-                                  }
-                                )
-                              }
-                        
-                                
-                        </div>   
-                        
-                        <hr/>
-                            <Form>
-                              <FormGroup row>
-                                <Label for="fullDescription" sm={2}>
-                                  Comment:
-                                </Label>
-                                <Col sm={10}>
-                                  <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
-                                </Col>
-                              </FormGroup>
-                              <Button onClick={props.addNewComment} className="float-right btn-info">
-                                Submit
-                              </Button>
-                            </Form>
-                          </div> : undefined}
-                      </div>
+
+              {props.showComments === true ? (
+                <div>
+                  <div>
+                    <h2 className="text-right pauseFont text-muted">
+                      ·|comments|·
+                    </h2>
+
+                    {props.comments.map((comment, index) => {
+                      return (
+                        <div className="row" key={comment._id}>
+                          <div className="col blog-main text-center">
+                            <div className="box">
+                              <div className="box-content">
+                                <h2 className="tag-title">
+                                  {comment.userId.username}
+                                </h2>
+                                <hr />
+                                <p>{comment.comment}</p>
+                                <br />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <hr />
+                  <Form>
+                    <FormGroup row>
+                      <Col>
+                        <Input
+                          type="textarea"
+                          onChange={props.newComment}
+                          name="fullDescription"
+                          id="fullDescription"
+                          placeholder="write the description that could you see from the post "
+                        />
+                      </Col>
+                    </FormGroup>
+                    <Button
+                      onClick={props.addNewComment}
+                      className="float-right btn-info"
+                    >
+                      Submit
+                    </Button>
+                  </Form>
+                </div>
+              ) : (
+                undefined
+              )}
+            </div>
             {/* /.blog-main */}
 
             <aside className="col-md-4 blog-sidebar">
@@ -535,82 +559,85 @@ function Quote(props) {
                 <p>{props.fullDescription}</p>
               </blockquote>
               <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo}>
-                  <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold}/> {props.kudos} Kudos
-                  </button>
-                  <button type="button"  className="btn btn-secondary">
-                  <a className="urlButton" href={props.URLpath} target={'_blank'} >
-                    <img src={LinkImg}  width={30} />Source
+                <button type="button" className="btn" onClick={props.addKudo}>
+                  <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold} />{" "}
+                  {props.kudos} Kudos
+                </button>
+                <button type="button" className="btn btn-secondary">
+                  <a
+                    className="urlButton"
+                    href={props.URLpath}
+                    target={"_blank"}
+                  >
+                    <img src={LinkImg} width={30} />Source
                   </a>
-                  </button>
-                  <button type="button"  className="btn btn-dark" onClick={props.enableComments}>
-                    <img src={CommentsImg} width={30} />Discuss
-                  </button>
-                </div>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={props.enableComments}
+                >
+                  <img src={CommentsImg} width={30} />Discuss
+                </button>
+              </div>
               <hr />
               <p className="text-muted">
                 Kudos (from the Ancient Greek: κῦδος) is acclaim or praise for
                 exceptional achievement.
               </p>
             </div>
-            {props.showComments === true ? 
-                        
-                        <div>
-                            <div>
-                              <h2 className="text-right pauseFont text-muted">
-                                ·|comments|·
+            {props.showComments === true ? (
+              <div>
+                <div>
+                  <h2 className="text-right pauseFont text-muted">
+                    ·|comments|·
+                  </h2>
+
+                  {props.comments.map((comment, index) => {
+                    return (
+                      <div className="row" key={comment._id}>
+                        <div className="col blog-main text-center">
+                          <div className="box">
+                            <div className="box-content">
+                              <h2 className="tag-title">
+                                {comment.userId.username}
                               </h2>
-                        
-                              {props.comments.map((post, index) => {
-                                    return (
-                                      <div className="row">
-                                        <div className="col blog-main text-center">
-                                          <div className="box">
-                                          <div className="box-content">
-                                            <h2 className="tag-title">mediacloner</h2>
-                                            <hr />
-                                            <p>
-                                              Lorem ipsum dolor sit amet, consectetur
-                                              adipiscing elit. Curabitur arcu erat, accumsan
-                                              id imperdiet et, porttitor at sem. Proin eget
-                                              tortor risus.Cras ultricies ligula sed magna
-                                              dictum porta. Vivamus magna justo, lacinia eget
-                                              consectetur sed, convallis at tellus. Curabitur
-                                              non nulla sit amet nisl tempus convallis quis ac
-                                              lectus.
-                                            </p>
-                                            <br />
-                                            <a href="ppc.html" className="btn btn-info">
-                                              User Timeline
-                                            </a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      </div>
-                                    )
-                                  }
-                                )
-                              }
-                        
-                                
-                        </div>   
-                        
-                        <hr/>
-                            <Form>
-                              <FormGroup row>
-                                <Label for="fullDescription" sm={2}>
-                                  Comment:
-                                </Label>
-                                <Col sm={10}>
-                                  <Input type="textarea" onChange={props.newComment} name="fullDescription" id="fullDescription" placeholder="write the description that could you see from the post " />
-                                </Col>
-                              </FormGroup>
-                              <Button onClick={props.addNewComment} className="float-right btn-info">
-                                Submit
-                              </Button>
-                            </Form>
-                          </div> : undefined}
+                              <hr />
+                              <p>{comment.comment}</p>
+                              <br />
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                    );
+                  })}
+                </div>
+
+                <hr />
+                <Form>
+                  <FormGroup row>
+                    <Col>
+                      <Input
+                        type="textarea"
+                        onChange={props.newComment}
+                        name="fullDescription"
+                        id="fullDescription"
+                        placeholder="write the description that could you see from the post "
+                      />
+                    </Col>
+                  </FormGroup>
+                  <Button
+                    onClick={props.addNewComment}
+                    className="float-right btn-info"
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            ) : (
+              undefined
+            )}
+          </div>
           {/* /.blog-main */}
           <aside className="col-md-4 blog-sidebar">
             <div className="p-3 mb-3 bg-light rounded">
