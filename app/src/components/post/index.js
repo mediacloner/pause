@@ -289,12 +289,12 @@ function Youtube(props) {
                       ·|comments|·
                     </h2>
               
-                    {props.comments.map((post, index) => {
+                    {props.comments.map((comment, index) => {
                           return (
-                            <div className="row">
+                            <div className="row" key ={comment._id}>
                               <div className="col blog-main text-center">
                                 <div className="box">
-                                <div className="box-content">
+                                <div className="box-content" >
                                   <h2 className="tag-title">mediacloner</h2>
                                   <hr />
                                   <p>

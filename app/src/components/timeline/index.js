@@ -65,7 +65,7 @@ export default class Timeline extends React.Component {
           <div className="row">
             {this.state.posts.map((post, index) => {
               return (
-                <div className="col-md-4 text-center key ={post._id}">
+                <div className="col-md-4 text-center" key ={post._id}>
                   <div className="box">
                     <div className="box-content">
                       <h1 className="tag-title">{post.title}</h1>
