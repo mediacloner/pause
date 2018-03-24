@@ -11,9 +11,10 @@ import {
   Media
 } from "reactstrap";
 import "../../styles/main.css";
-import KudosImg from "./../../img/kudos_ico_red.svg";
-import LinkImg from "./../../img/link_ico_red.svg";
-import CommentsImg from "./../../img/comments_ico_red.svg";
+import KudosImg from "./../../img/kudos.svg";
+import KudosImgGold from "./../../img/kudosGold.svg";
+import LinkImg from "./../../img/link.svg";
+import CommentsImg from "./../../img/comments.svg";
 import WaveImg from "./../../img/wave.svg";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -40,20 +41,15 @@ export default class Post extends React.Component {
       showComments: false,
       comments: [],
       newComment:"",
-      counterKudos:""
+      counterKudos: 0
     };
   }
 
-  componentDidMount = () => {
-    apiClient
-      .retrievePost(this.props.postId)
-      .then(post => {
-        return this.handleFillResult(post);
-      })
-      //.then (this.props.postResult())
-      .catch(console.error);
-  };
 
+  componentDidMount = () => {
+    this.retrievePost(this.props.postId)
+  };
+  
 
   enableComments = (e) => {
     e.preventDefault()
@@ -68,20 +64,44 @@ export default class Post extends React.Component {
 
   }
 
+  retrievePost = (postId) =>{
+    apiClient
+    .retrievePost(postId)
+    .then(post => {
+      return this.handleFillResult(post);
+    })
+    //.then (this.props.postResult())
+    .catch(console.error);
 
-  addKudo = (id)=> {
+  };
+ 
 
-    console.log(this.state.counterKudos, this.state.id, id);
+
+
+  addKudo = (e)=> {
+
+
+
       if (this.state.counterKudos < 5){
+
         apiClient.addKudo(this.state.id)
-        .then(kudos => {
-          console.log(this.state.counterKudos, this.state.id);
+        .then(() => {
+            this.setState({counterKudos: this.state.counterKudos+1})
+
         })
-        .catch(console.error);
+        .then(() => {
 
-      }  
+          this.retrievePost(this.props.postId)
+        })
 
-}
+        .catch(console.error); 
+
+      }
+
+
+      } ; 
+
+
   youtubeParser = url => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
@@ -144,6 +164,7 @@ export default class Post extends React.Component {
             showComments={this.state.showComments}
             addNewComment={this.addNewComment}
             addKudo={this.addKudo}
+            counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
 
           />
@@ -170,6 +191,7 @@ export default class Post extends React.Component {
             youtubeParser={this.youtubeParser}
             addNewComment={this.addNewComment}
             addKudo={this.addKudo}
+            counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
           />
         ) : (
@@ -194,6 +216,7 @@ export default class Post extends React.Component {
             newComment={this.state.newComment}
             header={this.state.timelineName}
             addNewComment={this.addNewComment}
+            counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
           />
         ) : (
@@ -233,8 +256,8 @@ function Youtube(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>  
-                    <img src={KudosImg}/> {props.kudos} Kudos
+                  <button type="button" className="btn" onClick={props.addKudo}>  
+                    <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold} width={30}/> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
                   <a className="urlButton" href={props.URLpath} target={'_blank'} >
@@ -364,8 +387,8 @@ function Audio(props) {
                   <p>{props.fullDescription}</p>
                 </blockquote>
                 <div className="btn-group">
-                    <button type="button" className="btn" onClick={props.addKudo(props.id)}>
-                    <img src={KudosImg} /> {props.kudos} Kudos
+                    <button type="button" className="btn" onClick={props.addKudo}>
+                    <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold}/> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
                   <a className="urlButton" href={props.URLpath} target={'_blank'} >
@@ -498,8 +521,8 @@ function Quote(props) {
                 <p>{props.fullDescription}</p>
               </blockquote>
               <div className="btn-group">
-                  <button type="button" className="btn" onClick={props.addKudo(props.id)}>
-                    <img src={KudosImg} /> {props.kudos} Kudos
+                  <button type="button" className="btn" onClick={props.addKudo}>
+                  <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold}/> {props.kudos} Kudos
                   </button>
                   <button type="button"  className="btn btn-secondary">
                   <a className="urlButton" href={props.URLpath} target={'_blank'} >
@@ -566,8 +589,6 @@ function Quote(props) {
             ) : (
               undefined
             )}
-
-
 
           </div>
           {/* /.blog-main */}
