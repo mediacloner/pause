@@ -4,10 +4,7 @@ import {
   Button,
   Form,
   FormGroup,
-  Label,
   Input,
-  FormText,
-  Container,
   Media
 } from "reactstrap";
 import "../../styles/main.css";
@@ -60,8 +57,6 @@ export default class Post extends React.Component {
   };
 
   addNewComment = () => {
-    console.log;
-
     apiClient
       .createComment(
         this.state.id,
@@ -100,7 +95,7 @@ export default class Post extends React.Component {
   youtubeParser = url => {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
-    return match && match[7].length == 11 ? match[7] : false;
+    return match && match[7].length === 11 ? match[7] : false;
   };
 
   handleViewsPost = e => {
@@ -142,7 +137,7 @@ export default class Post extends React.Component {
   render() {
     return (
       <div>
-        {this.state.idPostTemplate == "0" ? (
+        {this.state.idPostTemplate === "0" ? (
           <Audio
             id={this.state.id}
             title={this.state.title}
@@ -167,7 +162,7 @@ export default class Post extends React.Component {
         ) : (
           undefined
         )}
-        {this.state.idPostTemplate == "1" ? (
+        {this.state.idPostTemplate === "1" ? (
           <Youtube
             id={this.state.id}
             title={this.state.title}
@@ -193,7 +188,7 @@ export default class Post extends React.Component {
         ) : (
           undefined
         )}
-        {this.state.idPostTemplate == "2" ? (
+        {this.state.idPostTemplate === "2" ? (
           <Quote
             id={this.state.id}
             title={this.state.title}
@@ -241,13 +236,13 @@ function Youtube(props) {
                 <p className="blog-post-meta">
                   {" "}
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>
-                  <a href="#">{props.owner.username}</a>
+                  <a href="">{props.owner.username}</a>
                 </p>
                 <h3>Short Description</h3>
                 <p>{props.shortDescription}</p>
                 <h3>Video</h3>
                 <div className="embed-responsive embed-responsive-16by9">
-                  <iframe
+                  <iframe title="Youtube"
                     width={560}
                     height={315}
                     src={
@@ -266,7 +261,7 @@ function Youtube(props) {
                 </blockquote>
                 <div className="btn-group">
                   <button type="button" className="btn" onClick={props.addKudo}>
-                    <img
+                    <img alt="kudos"
                       src={props.counterKudos < 5 ? KudosImg : KudosImgGold}
                       width={30}
                     />{" "}
@@ -278,7 +273,7 @@ function Youtube(props) {
                       href={props.URLpath}
                       target={"_blank"}
                     >
-                      <img src={LinkImg} width={30} />Source
+                      <img alt="Source" src={LinkImg} width={30} />Source
                     </a>
                   </button>
                   <button
@@ -286,7 +281,7 @@ function Youtube(props) {
                     className="btn btn-dark"
                     onClick={props.enableComments}
                   >
-                    <img src={CommentsImg} width={30} />Discuss
+                    <img alt="Discuss" src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
                 <hr />
@@ -358,13 +353,13 @@ function Youtube(props) {
                 <h4 className="font-italic">Elsewhere</h4>
                 <ol className="list-unstyled">
                   <li>
-                    <a href="#">GitHub</a>
+                    <a href="">GitHub</a>
                   </li>
                   <li>
-                    <a href="#">Twitter</a>
+                    <a href="">Twitter</a>
                   </li>
                   <li>
-                    <a href="#">Facebook</a>
+                    <a href="">Facebook</a>
                   </li>
                 </ol>
               </div>
@@ -395,13 +390,13 @@ function Audio(props) {
                 <h2 className="blog-post-title">{props.title}</h2>
                 <p className="blog-post-meta">
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>{" "}
-                  <a href="#">{props.owner.username}</a>
+                  <a href="">{props.owner.username}</a>
                 </p>
                 <h3>Short Description</h3>
                 <p>{props.shortDescription}</p>
                 <h3>Audio</h3>
                 <Media left href="#">
-                  <img src={WaveImg} />
+                  <img alt="wave" src={WaveImg} />
                 </Media>
                 <div>
                   <audio id="myAudio" controls>
@@ -416,7 +411,7 @@ function Audio(props) {
                 </blockquote>
                 <div className="btn-group">
                   <button type="button" className="btn" onClick={props.addKudo}>
-                    <img
+                    <img alt="kudos"
                       src={props.counterKudos < 5 ? KudosImg : KudosImgGold}
                     />{" "}
                     {props.kudos} Kudos
@@ -427,7 +422,7 @@ function Audio(props) {
                       href={props.URLpath}
                       target={"_blank"}
                     >
-                      <img src={LinkImg} width={30} />Source
+                      <img alt="Source" src={LinkImg} width={30} />Source
                     </a>
                   </button>
                   <button
@@ -435,7 +430,7 @@ function Audio(props) {
                     className="btn btn-dark"
                     onClick={props.enableComments}
                   >
-                    <img src={CommentsImg} width={30} />Discuss
+                    <img  alt="Discuss" src={CommentsImg} width={30} />Discuss
                   </button>
                 </div>
                 <hr />
@@ -508,13 +503,13 @@ function Audio(props) {
                 <h4 className="font-italic">Elsewhere</h4>
                 <ol className="list-unstyled">
                   <li>
-                    <a href="#">GitHub</a>
+                    <a href="">GitHub</a>
                   </li>
                   <li>
-                    <a href="#">Twitter</a>
+                    <a href="">Twitter</a>
                   </li>
                   <li>
-                    <a href="#">Facebook</a>
+                    <a href="">Facebook</a>
                   </li>
                 </ol>
               </div>
@@ -547,7 +542,7 @@ function Quote(props) {
                 <Moment format="DD/MM/YYYY HH:MM ">
                   {props.createAt}
                 </Moment>{" "}
-                <a href="#">{props.owner.username}</a>
+                <a href="">{props.owner.username}</a>
               </p>
               <div className="jumbotron p-3 p-md-5 text-white rounded bg-dark">
                 <div className="col-md-6 px-0">
@@ -560,7 +555,7 @@ function Quote(props) {
               </blockquote>
               <div className="btn-group">
                 <button type="button" className="btn" onClick={props.addKudo}>
-                  <img src={props.counterKudos < 5 ? KudosImg : KudosImgGold} />{" "}
+                  <img  alt="kudos" src={props.counterKudos < 5 ? KudosImg : KudosImgGold} />{" "}
                   {props.kudos} Kudos
                 </button>
                 <button type="button" className="btn btn-secondary">
@@ -569,7 +564,7 @@ function Quote(props) {
                     href={props.URLpath}
                     target={"_blank"}
                   >
-                    <img src={LinkImg} width={30} />Source
+                    <img alt="Source" src={LinkImg} width={30} />Source
                   </a>
                 </button>
                 <button
@@ -577,7 +572,7 @@ function Quote(props) {
                   className="btn btn-dark"
                   onClick={props.enableComments}
                 >
-                  <img src={CommentsImg} width={30} />Discuss
+                  <img alt="Discuss" src={CommentsImg} width={30} />Discuss
                 </button>
               </div>
               <hr />
@@ -653,13 +648,13 @@ function Quote(props) {
               <h4 className="font-italic">Elsewhere</h4>
               <ol className="list-unstyled">
                 <li>
-                  <a href="#">GitHub</a>
+                  <a href="">GitHub</a>
                 </li>
                 <li>
-                  <a href="#">Twitter</a>
+                  <a href="">Twitter</a>
                 </li>
                 <li>
-                  <a href="#">Facebook</a>
+                  <a href="">Facebook</a>
                 </li>
               </ol>
             </div>

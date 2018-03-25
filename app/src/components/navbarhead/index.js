@@ -2,15 +2,16 @@ import React from 'react'
 
 import {
   Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown,
-  DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Label, Input
+  DropdownToggle, DropdownMenu, DropdownItem, Button, Form, FormGroup, Input
 } from 'reactstrap';
 import "../../styles/navbar.css";
 import "../../styles/main.css";
 import Timeline from '../../components/timeline'
 import Newpost from '../../components/newpost'
 import Post from '../../components/post'
+import Following from '../../components/following'
 
-import apiClient from "../../services/api-config"
+
 
 
 
@@ -27,7 +28,8 @@ export default class NavbarHead extends React.Component {
       show : 'timeline', 
       timelineName: '·|my timeline|·',
       search: '',
-      postId: ''
+      postId: '', 
+      userId: '5aafaa281ca9687a2d6bb1b4'
     };
   }
 
@@ -94,7 +96,7 @@ export default class NavbarHead extends React.Component {
                 <NavLink id='newpost'onClick={this.handleViews} href="">New Post</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Settings</NavLink>
+                <NavLink id='following'onClick={this.handleViews}href="">Following</NavLink>
               </NavItem>
               <Form inline  id="search" onSubmit={ this.prevent }>
                 <FormGroup  id="search" className="mb-2 mr-sm-2 mb-sm-0">
@@ -109,7 +111,8 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}
             {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
-            {this.state.show === 'timeline'?<Timeline search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show === 'timeline'?<Timeline userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show === 'following'?<Following userId={this.state.userId} />:undefined}
       </div>
     );
   }

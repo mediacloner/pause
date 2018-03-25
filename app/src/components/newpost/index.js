@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import "../../styles/main.css";
 import apiClient from "../../services/api-config"
 
@@ -78,6 +78,10 @@ export default class Newpost extends React.Component {
             case 'time':
             this.setState({time:e.target.value});
             break;
+
+            default:
+            console.error ('Switch error on New Post')
+            break;
     
         }
     
@@ -133,7 +137,7 @@ render() {
 
 
 
-            {this.state.idPostTemplate != '2'? (<FormGroup row>
+            {this.state.idPostTemplate !== '2'? (<FormGroup row>
              <Label for="exampleTime" sm={2}>Time</Label> 
              <Col sm={10}><Input type="text" onChange={ this.updatePost } name="time" id="time" placeholder="HH:MM:SS" /> 
              </Col>  </FormGroup>):undefined}

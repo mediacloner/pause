@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom'
+//import { NavLink } from 'react-router-dom'
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import "../../styles/main.css";
 
 export default class Newcomment extends React.Component {
