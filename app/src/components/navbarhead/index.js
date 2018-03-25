@@ -29,7 +29,8 @@ export default class NavbarHead extends React.Component {
       timelineName: '·|my timeline|·',
       search: '',
       postId: '', 
-      userId: '5aafaa281ca9687a2d6bb1b4'
+      userId: '5aafaa281ca9687a2d6bb1b4',
+      userView : ''
     };
   }
 
@@ -42,6 +43,7 @@ export default class NavbarHead extends React.Component {
     else if (e.target.id === 'justnowTimeline') this.setState( {timelineName: '·|just now timeline|·', show:'timeline'})
     else if (e.target.id === 'search') this.setState( {timelineName: '·|results|·', show:'timeline'})
     else if (e.target.id === 'newpost') this.setState( {timelineName: '·|new post|·',  show:'newpost'})
+    else if (e.target.id === 'following') this.setState( {timelineName: '·|following|·',  show:'following'})
   }
 
    
@@ -52,6 +54,12 @@ export default class NavbarHead extends React.Component {
   postView=(e)=>{
     e.preventDefault()
     this.setState({show: 'post', postId: e.target.id })
+   }
+
+   userView = (userId) => {
+    //e.preventDefault()
+    this.setState({userView: userId })
+
    }
    
    postResult=()=>{
@@ -112,7 +120,7 @@ export default class NavbarHead extends React.Component {
             {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}
             {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
             {this.state.show === 'timeline'?<Timeline userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
-            {this.state.show === 'following'?<Following userId={this.state.userId} />:undefined}
+            {this.state.show === 'following'?<Following userView={this.userView} />:undefined}
       </div>
     );
   }

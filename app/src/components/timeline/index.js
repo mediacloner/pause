@@ -1,6 +1,7 @@
 //import { NavLink } from 'react-router-dom'
 import React from 'react'
 import apiClient from "../../services/api-config"
+import { Button } from 'reactstrap';
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -55,17 +56,27 @@ export default class Timeline extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-
-
+    return <div>
         <div className="container topmed">
+          <div className="row">
+            <h2 className="col-md-12 text-center text-secondary pauseFont ">
+              {this.props.header}
+            </h2>
+          </div>
 
-          <h2 className="text-center text-secondary pauseFont ">{this.props.header}</h2>
+
+          {
+            this.state.posts.length > 0 ?
+            <div className="row">
+              <div className="col-md-12 text-right">
+                {this.props.header === '·|user timeline|·'?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
+              </div>
+            </div>:undefined
+          }
+
           <div className="row">
             {this.state.posts.map((post, index) => {
-              return (
-                <div className="col-md-4 text-center" key ={post._id}>
+              return <div className="col-md-4 text-center" key={post._id}>
                   <div className="box">
                     <div className="box-content">
                       <h1 className="tag-title">{post.title}</h1>
@@ -77,13 +88,10 @@ export default class Timeline extends React.Component {
                       </a>
                     </div>
                   </div>
-                </div>
-              );
+                </div>;
             })}
           </div>
-
         </div>
-      </div>
-    );
+      </div>;
   }
 }

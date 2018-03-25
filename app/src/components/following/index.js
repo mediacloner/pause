@@ -3,63 +3,54 @@ import React from 'react'
 import apiClient from "../../services/api-config"
 
 import {
-  Button, Badge
+ UncontrolledAlert, Table, Container, Button
 } from 'reactstrap';
 
 export default class Following extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    following: [],
-    }
+      following: []
+    };
   }
-
+/* 5aafaac91ca9687a2d6bb1b5 */
   getListPosts = () => {
-
     apiClient
       .listPosts()
       .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error)
-  }
+      .catch(console.error);
+  };
 
-  getListPostsByGroup = (id) => {
-    apiClient
-      .listPostsByGroup(id)
-      .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error)
-  }
-
-  getListPostsByUser = (id) => {
-
-    apiClient
-      .listPostsByUser(id)
-      .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error)
-  }
-  search = (word) => {
-
-    apiClient
-      .search(word)
-      .then(posts => this.setState({ posts: posts.data }))
-      .catch(console.error)
-  }
-
-
-  componentDidMount() {
-   
-  }
-  componentWillReceiveProps(nextProps) {
-    
-  }
+  componentDidMount() {}
+  componentWillReceiveProps(nextProps) {}
 
   render() {
     return (
       <div>
-        <Button color="primary" outline>
-          Followers <Badge color="secondary">124</Badge>
-        </Button>
+        <UncontrolledAlert color="info">
+          Actually you have 124 followers! Great!
+        </UncontrolledAlert>
+
+        <Container className="topmed">
+          <h2 className="text-right text-secondary pauseFont ">·|following|·</h2>
+          <Table striped>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Access</th>
+                <th>Timeline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="id">Name</th>
+                <td><Button outline size="sm" color="info">Read her or his Timeline</Button>{' '}</td>
+                <td>Mark</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Container>
       </div>
-     
     );
   }
 }
