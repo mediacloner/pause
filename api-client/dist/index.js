@@ -18,7 +18,7 @@ var apiClient = {
        } */
 
     listPosts: function listPosts() {
-        return data(axios.get(url.resolve(undefined.baseUrl, 'list')));
+        return data(axios.get(url.resolve(this.baseUrl, 'list')));
     },
 
     listPostsByUser: function listPostsByUser(id) {
