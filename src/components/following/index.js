@@ -46,7 +46,7 @@ export default class Following extends React.Component {
               </tr>
             </thead>
             {             
-              this.state.following.length  ? this.state.following.map((user, index) => {
+              this.state.following.length  ? this.state.following.map((user, index) => 
             <tbody>
               <tr key = {user.userId._id}>
                 <th scope="id">{user.userId.username}</th>
@@ -54,7 +54,7 @@ export default class Following extends React.Component {
                 <td>{user.userId.city}</td>
                 <td><Button key={user.userId._id} id='following' outline size="sm" color="info">Read her or his Timeline</Button></td>
               </tr>
-            </tbody>}):undefined}
+            </tbody>):undefined}
           </Table>
         </Container>
       </div>
