@@ -37,15 +37,18 @@ export default class Following extends React.Component {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Access</th>
                 <th>Timeline</th>
+                <th>City</th>
+                <th>Access</th>
               </tr>
             </thead>
+          
             <tbody>
               <tr>
-                <th scope="id">Name</th>
+                <th scope="id">Mark</th>
+                <td>Men of the Moon</td>
+                <td>Barcelona</td>
                 <td><Button outline size="sm" color="info">Read her or his Timeline</Button>{' '}</td>
-                <td>Mark</td>
               </tr>
             </tbody>
           </Table>
