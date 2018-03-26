@@ -14,14 +14,17 @@ export default class Following extends React.Component {
     };
   }
 /* 5aafaac91ca9687a2d6bb1b5 */
-  getListPosts = () => {
+  getlistFollowingByUser = (id) => {
     apiClient
-      .listPosts()
-      .then(posts => this.setState({ posts: posts.data }))
+      .listFollowingByUser(id)
+      .then(followRes => this.setState({ following: followRes.data }))
       .catch(console.error);
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    //this.getlistFollowingByUser("5aafaac91ca9687a2d6bb1b5")
+
+  }
   componentWillReceiveProps(nextProps) {}
 
   render() {
@@ -48,7 +51,7 @@ export default class Following extends React.Component {
                 <th scope="id">Mark</th>
                 <td>Men of the Moon</td>
                 <td>Barcelona</td>
-                <td><Button outline size="sm" color="info">Read her or his Timeline</Button>{' '}</td>
+                <td><Button id='following' outline size="sm" color="info">Read her or his Timeline</Button></td>
               </tr>
             </tbody>
           </Table>

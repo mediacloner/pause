@@ -47,13 +47,14 @@ export default class Timeline extends React.Component {
     else if (this.props.header === '·|our timeline|·') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
     else if (this.props.header === '·|just now timeline|·') this.getListPosts()
     else if (this.props.header === '·|results|·') this.search(this.props.search)
+    else if (this.props.header === '·|selected user|·') this.getListPostsByUser(this.props.userView)
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.header === '·|my timeline|·') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
     else if (nextProps.header === '·|our timeline|·') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
     else if (nextProps.header === '·|just now timeline|·') this.getListPosts()
     else if (nextProps.header === '·|results|·') this.search(this.props.search)
-  }
+    else if (this.props.header === '·|selected user|·') this.getListPostsByUser(this.props.userView)}
 
   render() {
     return <div>
