@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "api-client": "file:../api-client",
+    "api-client": "file:./api-client",
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "moment": "^2.21.0",
