@@ -113,9 +113,9 @@ render() {
           </Col>
         </FormGroup>
         <FormGroup row >
-          <Label for="shortDescription" sm={2}><h5 class="text-info">Short Description</h5></Label>
+          <Label for="shortDescription"  sm={2}><h5 class="text-info">Short Description</h5></Label>
           <Col sm={10} >
-            <Input type="shortDescription" onChange={ this.updatePost } name="shortDescription" id="shortDescription" placeholder="write a short description for timeline" />
+            <Input type="shortDescription" maxLength="140" onChange={ this.updatePost } name="shortDescription" id="shortDescription" placeholder="Write a short description for timeline in 140 characters" />
           </Col>
         </FormGroup>
          <FormGroup row>

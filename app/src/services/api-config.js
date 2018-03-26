@@ -2,9 +2,10 @@
 
 import apiClient from "api-client";
 
-apiClient.protocol = process.env.REACT_APP_API_PROTOCOL
-apiClient.host =process.env.REACT_APP_API_HOST
-apiClient.port = process.env.REACT_APP_API_PORT 
+/* apiClient.protocol = process.env.REACT_APP_API_PROTOCOL
+/* apiClient.host =process.env.REACT_APP_API_HOST
+apiClient.port = process.env.REACT_APP_API_PORT  */
+
 
 export default apiClient
 
