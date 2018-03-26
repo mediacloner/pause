@@ -17,12 +17,12 @@ export default class Following extends React.Component {
   getlistFollowingByUser = (id) => {
     apiClient
       .listFollowingByUser(id)
-      .then(followRes => this.setState({ following: followRes.data }))
+      .then(followRes => this.setState({ following: followRes.data.following }))
       .catch(console.error);
   };
 
   componentDidMount() {
-    //this.getlistFollowingByUser("5aafaac91ca9687a2d6bb1b5")
+    this.getlistFollowingByUser("5aafaa281ca9687a2d6bb1b4")
 
   }
   componentWillReceiveProps(nextProps) {}
@@ -31,7 +31,7 @@ export default class Following extends React.Component {
     return (
       <div>
         <UncontrolledAlert color="info">
-          Actually you have 124 followers! Great!
+          Currently you have 124 followers! Great!
         </UncontrolledAlert>
 
         <Container className="topmed">
@@ -45,15 +45,16 @@ export default class Following extends React.Component {
                 <th>Access</th>
               </tr>
             </thead>
-          
+            {             
+              this.state.following.length  ? this.state.following.map((user, index) => {
             <tbody>
-              <tr>
-                <th scope="id">Mark</th>
-                <td>Men of the Moon</td>
-                <td>Barcelona</td>
-                <td><Button id='following' outline size="sm" color="info">Read her or his Timeline</Button></td>
+              <tr key = {user.userId._id}>
+                <th scope="id">{user.userId.username}</th>
+                <td>{user.userId.timelineTitle}</td>
+                <td>{user.userId.city}</td>
+                <td><Button key={user.userId._id} id='following' outline size="sm" color="info">Read her or his Timeline</Button></td>
               </tr>
-            </tbody>
+            </tbody>}):undefined}
           </Table>
         </Container>
       </div>
