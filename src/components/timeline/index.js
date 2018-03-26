@@ -70,7 +70,7 @@ export default class Timeline extends React.Component {
             this.state.posts.length > 0 ?
             <div className="row">
               <div className="col-md-12 text-right">
-                {this.props.header === '·|user timeline|·'?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
+                {this.props.header === '·|user timeline|·' || this.props.header ==='·|selected user|·' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
               </div>
             </div>:undefined
           }

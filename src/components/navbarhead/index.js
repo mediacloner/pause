@@ -48,12 +48,9 @@ export default class NavbarHead extends React.Component {
   }
 
 
-  otherUserView = (userId) => {
-   //e.preventDefault()
-
-   console.log('YEP')
-   this.setState({userView: userId })
-   //this.setState( {timelineName: '·|selected user|·',  show:'otheruser'})
+  otherUserView = (e) => {
+   e.preventDefault()
+   this.setState({userView: e.target.id, timelineName: '·|selected user|·',  show:'timeline' })
   }
 
    
