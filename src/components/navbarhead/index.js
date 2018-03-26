@@ -30,7 +30,8 @@ export default class NavbarHead extends React.Component {
       search: '',
       postId: '', 
       userId: '5aafaa281ca9687a2d6bb1b4',
-      userView : ''
+      userView : '',
+      filter: 'mytimeline'
     };
   }
 
