@@ -31,7 +31,7 @@ export default class NavbarHead extends React.Component {
       postId: '', 
       userId: '5aafaa281ca9687a2d6bb1b4',
       userView : '',
-      filter: 'mytimeline'
+      filter: 'ownPostsTimeline'
     };
   }
 
@@ -39,34 +39,34 @@ export default class NavbarHead extends React.Component {
 
   handleViews=(e)=>{
     e.preventDefault()
-    if (e.target.id === 'myTimeline') this.setState( {timelineName: '·|my timeline|·', show:'timeline'})
-    else if (e.target.id === 'ourTimeline') this.setState( {timelineName: '·|our timeline|·', show:'timeline'})
-    else if (e.target.id === 'justnowTimeline') this.setState( {timelineName: '·|just now timeline|·', show:'timeline'})
-    else if (e.target.id === 'otheruser') this.setState( {timelineName: '·|selected user|·', show:'timeline'})
-    else if (e.target.id === 'search') this.setState( {timelineName: '·|results|·', show:'timeline'})
-    else if (e.target.id === 'newpost') this.setState( {timelineName: '·|new post|·',  show:'newpost'})
-    else if (e.target.id === 'following'){ this.setState( {timelineName: '·|following|·',  show:'following'})}
+    if (e.target.id === 'myTimeline') this.setState( {timelineName: '·|my timeline|·', filter: 'ownPostsTimeline', show:'timeline'})
+    else if (e.target.id === 'ourTimeline') this.setState( {timelineName: '·|our timeline|·', filter: 'followPostTimeline' ,show:'timeline'})
+    else if (e.target.id === 'justnowTimeline') this.setState( {timelineName: '·|just now timeline|·', filter: 'allPostTimeline' ,show:'timeline'})
+    else if (e.target.id === 'otheruser') this.setState( {timelineName: '·|selected user|·',filter: 'userTimeline' , show:'timeline'})
+    else if (e.target.id === 'search') this.setState( {timelineName: '·|results|·', filter: 'searchPost' ,show:'timeline'})
+    else if (e.target.id === 'newpost') this.setState( {timelineName: '·|new post|·', filter: 'newpost', show:'newpost'})
+    else if (e.target.id === 'following'){ this.setState( {timelineName: '·|following|·', filter: 'followingPost', show:'following'})}
   }
 
 
   otherUserView = (e) => {
    e.preventDefault()
-   this.setState({userView: e.target.id, timelineName: '·|selected user|·',  show:'timeline' })
+   this.setState({userView: e.target.id, timelineName: '·|selected user|·',  show:'timeline',filter: 'userTimeline' })
   }
 
    
   updateSearch = (e) => {
-    this.setState({ search: e.target.value })}
+    this.setState({ search: e.target.value, timelineName: '·|results|·' ,filter: 'searchPost' ,show:'timeline'})} 
 
     
   postView=(e)=>{
     e.preventDefault()
-    this.setState({show: 'post', postId: e.target.id })
+    this.setState({show: 'post', postId: e.target.id, filter: 'newpost' })
    }
 
    
    postResult=()=>{
-    this.setState({timelineName: '·|my timeline|·',show: 'timeline'})
+    this.setState({timelineName: '·|my timeline|·',show: 'timeline', filter: 'ownPostsTimeline'})
    }
 
    prevent=(e)=>{
@@ -112,7 +112,6 @@ export default class NavbarHead extends React.Component {
               <Form inline  id="search" onSubmit={ this.prevent }>
                 <FormGroup  id="search" className="mb-2 mr-sm-2 mb-sm-0">
                   <Input onChange={ this.updateSearch } type="Search" name="find" id="find" placeholder="Find..." />
-                  <Button id='search' onClick={this.handleViews}>Search</Button>
                 </FormGroup>  
               </Form>
             </Nav>
@@ -122,7 +121,7 @@ export default class NavbarHead extends React.Component {
 
             {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}
             {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
-            {this.state.show === 'timeline'?<Timeline userView={this.state.userView} userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} header = {this.state.timelineName}/>:undefined}
+            {this.state.show === 'timeline'?<Timeline userView={this.state.userView} userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} filter = {this.state.filter} header = {this.state.timelineName}/>:undefined}
             {this.state.show === 'following'?<Following otherUserView={this.otherUserView} />:undefined}
 
       </div>

@@ -6,7 +6,7 @@ var url = require('url');
 
 var apiClient = {
     baseUrl: function baseUrl() {
-       /*  console.log('this->', undefined); */
+        console.log('this->', undefined);
         return 'http://localhost:5000/api/'; //`${this.protocol}://${this.host}:${this.port}/api/`
     },
     //  baseUrl: `http://localhost:5000/api/`,
@@ -20,9 +20,8 @@ var apiClient = {
        } */
 
     listPosts: function listPosts() {
-        return data(axios.get(url.resolve(undefined.baseUrl(), 'list')));
+        return data(axios.get(url.resolve(this.baseUrl(), 'list')));
     },
-
     listPostsByUser: function listPostsByUser(id) {
         return data(axios.get(url.resolve(this.baseUrl(), 'list/' + id)));
     },

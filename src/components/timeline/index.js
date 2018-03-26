@@ -1,7 +1,8 @@
 //import { NavLink } from 'react-router-dom'
 import React from 'react'
 import apiClient from "../../services/api-config"
-import { Button } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
+import Nofound from "./../../img/nofound.svg";
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -43,18 +44,18 @@ export default class Timeline extends React.Component {
 
 
   componentDidMount() {
-    if (this.props.header === '·|my timeline|·') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
-    else if (this.props.header === '·|our timeline|·') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
-    else if (this.props.header === '·|just now timeline|·') this.getListPosts()
-    else if (this.props.header === '·|results|·') this.search(this.props.search)
-    else if (this.props.header === '·|selected user|·') this.getListPostsByUser(this.props.userView)
+    if (this.props.filter === 'ownPostsTimeline') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
+    else if (this.props.filter === 'followPostTimeline') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
+    else if (this.props.filter === 'allPostTimeline') this.getListPosts()
+    else if (this.props.filter === 'searchPost') this.search(this.props.search)
+    else if (this.props.filter === 'userTimeline') this.getListPostsByUser(this.props.userView)
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.header === '·|my timeline|·') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
-    else if (nextProps.header === '·|our timeline|·') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
-    else if (nextProps.header === '·|just now timeline|·') this.getListPosts()
-    else if (nextProps.header === '·|results|·') this.search(this.props.search)
-    else if (this.props.header === '·|selected user|·') this.getListPostsByUser(this.props.userView)}
+    if (nextProps.filter === 'ownPostsTimeline') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
+    else if (nextProps.filter === 'followPostTimeline') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
+    else if (nextProps.filter === 'allPostTimeline') this.getListPosts()
+    else if (nextProps.filter === 'searchPost') this.search(this.props.search)
+    else if (nextProps.filter === 'userTimeline') this.getListPostsByUser(this.props.userView)}
 
   render() {
     return <div>
@@ -70,13 +71,13 @@ export default class Timeline extends React.Component {
             this.state.posts.length > 0 ?
             <div className="row">
               <div className="col-md-12 text-right">
-                {this.props.header === '·|user timeline|·' || this.props.header ==='·|selected user|·' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
+                {this.props.filter === 'ownPostsTimeline' || this.props.filter ==='userTimeline' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
               </div>
             </div>:undefined
           }
 
           <div className="row">
-            {this.state.posts.map((post, index) => {
+            {this.state.posts.length ? this.state.posts.map((post, index) => {
               return <div className="col-md-4 text-center" key={post._id}>
                   <div className="box">
                     <div className="box-content">
@@ -90,7 +91,7 @@ export default class Timeline extends React.Component {
                     </div>
                   </div>
                 </div>;
-            })}
+            }): <Container className="topmed"><img className="rounded mx-auto d-block" src={Nofound} alt="nofound" /> <h1 className="text-center logonav"> Ups! We don't have anything to show you.</h1></Container>}
           </div>
         </div>
       </div>;

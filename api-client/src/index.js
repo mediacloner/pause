@@ -17,7 +17,7 @@ const apiClient = {
         return this._call('post', 'login', { username, password })
     } */
     
-    listPosts: ()=> {
+    listPosts () {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')))
     },
 
