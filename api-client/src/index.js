@@ -3,19 +3,9 @@ const axios = require('axios')
 const url = require('url')
 
 const apiClient = {
-    baseUrl: ()=>{
-        console.log('this->',this)
-        return `http://localhost:5000/api/`//`${this.protocol}://${this.host}:${this.port}/api/`
+    baseUrl(){
+        return `${this.protocol}://${this.host}:${this.port}/api/`
     }, 
- //  baseUrl: `http://localhost:5000/api/`,
- //baseUrl: `${this.protocol}://${this.host}:${this.port}/api/`,
-
-/* baseUrl: "https://cryptic-bayou-64395.herokuapp.com/api/", */
-
- /*  
-    login(username, password) {
-        return this._call('post', 'login', { username, password })
-    } */
     
     listPosts () {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')))
@@ -57,6 +47,10 @@ const apiClient = {
 
     createPost(  title, shortDescription, fullDescription, owner,idPostTemplate,namePostTemplate,tag, URLpath, time) {
         return data(axios.post(url.resolve(this.baseUrl(), 'post'), {  title,shortDescription,fullDescription,owner,idPostTemplate,namePostTemplate,tag, URLpath, time }))
+    },
+
+    login (username, password) {
+        return data(axios.post(url.resolve(this.baseUrl(), 'login'), {  username, password}))
     },
 
     createUser ( name, surname, email, username, password, city, country, about, timelineTitle ) {

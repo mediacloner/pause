@@ -6,9 +6,10 @@ var url = require('url');
 
 var apiClient = {
     baseUrl: function baseUrl() {
-        console.log('this->', undefined);
-        return 'http://localhost:5000/api/'; //`${this.protocol}://${this.host}:${this.port}/api/`
+        console.log('this->', this);
+        return this.protocol + '://' + this.host + ':' + this.port + '/api/';
     },
+
     //  baseUrl: `http://localhost:5000/api/`,
     //baseUrl: `${this.protocol}://${this.host}:${this.port}/api/`,
 
@@ -51,6 +52,9 @@ var apiClient = {
     },
     createPost: function createPost(title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag, URLpath, time) {
         return data(axios.post(url.resolve(this.baseUrl(), 'post'), { title: title, shortDescription: shortDescription, fullDescription: fullDescription, owner: owner, idPostTemplate: idPostTemplate, namePostTemplate: namePostTemplate, tag: tag, URLpath: URLpath, time: time }));
+    },
+    login: function login(username, password) {
+        return data(axios.post(url.resolve(this.baseUrl(), 'login'), { username: username, password: password }));
     },
     createUser: function createUser(name, surname, email, username, password, city, country, about, timelineTitle) {
         return data(axios.post(url.resolve(this.baseUrl(), 'user'), { name: name, surname: surname, email: email, username: username, password: password, city: city, country: country, about: about, timelineTitle: timelineTitle }));

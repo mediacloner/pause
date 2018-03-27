@@ -10,6 +10,7 @@ import Timeline from '../../components/timeline'
 import Newpost from '../../components/newpost'
 import Post from '../../components/post'
 import Following from '../../components/following'
+import Signin from '../../components/signin'
 
 
 
@@ -25,13 +26,15 @@ export default class NavbarHead extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      show : 'timeline', 
-      timelineName: '·|my timeline|·',
+      show : 'signin', 
+      timelineName: '',
       search: '',
       postId: '', 
       userId: '5aafaa281ca9687a2d6bb1b4',
       userView : '',
-      filter: 'ownPostsTimeline'
+      filter: 'ownPostsTimeline',
+      loged: false,
+      userLoged: ''
     };
   }
 
@@ -123,6 +126,7 @@ export default class NavbarHead extends React.Component {
             {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
             {this.state.show === 'timeline'?<Timeline userView={this.state.userView} userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} filter = {this.state.filter} header = {this.state.timelineName}/>:undefined}
             {this.state.show === 'following'?<Following otherUserView={this.otherUserView} />:undefined}
+            {this.state.show === 'signin'?<Signin/>:undefined}
 
       </div>
     );
