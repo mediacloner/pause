@@ -51,6 +51,9 @@ export default class NavbarHead extends React.Component {
     else if (e.target.id === 'following'){ this.setState( {timelineName: '·|following|·', filter: 'followingPost', show:'following'})}
   }
 
+  loged = (swt) => {
+    this.setState({ loged: swt })
+  }
 
   otherUserView = (e) => {
    e.preventDefault()
@@ -126,7 +129,7 @@ export default class NavbarHead extends React.Component {
             {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
             {this.state.show === 'timeline'?<Timeline userView={this.state.userView} userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} filter = {this.state.filter} header = {this.state.timelineName}/>:undefined}
             {this.state.show === 'following'?<Following otherUserView={this.otherUserView} />:undefined}
-            {this.state.show === 'signin'?<Signin/>:undefined}
+            {this.state.show === 'signin'?<Signin loged={this.loged} />:undefined}
 
       </div>
     );

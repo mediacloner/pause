@@ -6,20 +6,8 @@ var url = require('url');
 
 var apiClient = {
     baseUrl: function baseUrl() {
-        console.log('this->', this);
         return this.protocol + '://' + this.host + ':' + this.port + '/api/';
     },
-
-    //  baseUrl: `http://localhost:5000/api/`,
-    //baseUrl: `${this.protocol}://${this.host}:${this.port}/api/`,
-
-    /* baseUrl: "https://cryptic-bayou-64395.herokuapp.com/api/", */
-
-    /*  
-       login(username, password) {
-           return this._call('post', 'login', { username, password })
-       } */
-
     listPosts: function listPosts() {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')));
     },
