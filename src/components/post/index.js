@@ -190,6 +190,9 @@ export default class Post extends React.Component {
             enableComments={this.enableComments}
             deleteComment={this.deleteComment}
             isOwnPost={this.state.isOwnPost}
+            otherUserView={this.props.otherUserView}
+            userLogged={this.state.userLogged}
+
           />
         ) : (
           undefined
@@ -218,6 +221,8 @@ export default class Post extends React.Component {
             enableComments={this.enableComments}
             deleteComment={this.deleteComment}
             isOwnPost={this.state.isOwnPost}
+            otherUserView={this.props.otherUserView}
+            userLogged={this.state.userLogged}
           />
         ) : (
           undefined
@@ -245,6 +250,8 @@ export default class Post extends React.Component {
             enableComments={this.enableComments}
             deleteComment={this.deleteComment}
             isOwnPost={this.state.isOwnPost}
+            otherUserView={this.props.otherUserView}
+            userLogged={this.state.userLogged}
           />
         ) : (
           undefined
@@ -340,15 +347,21 @@ function Youtube(props) {
                           <div className="col blog-main text-center">
                             <div className="box">
                               <div className="box-content">
+
+                              {props.userLogged.idUser !== comment.userId._id? 
+
                                 <h2 className="tag-title">
-                                  {comment.userId.username}
+                                <a onClick={ (e)=>props.otherUserView(e) }                     
+                                id={comment.userId._id}> {comment.userId.username} </a>
                                 </h2>
-                                <hr />
+                              :
+                              <h2 className="tag-title"> {comment.userId.username}</h2>
+                            
+                            }
+                                  <hr />
                                 <p>{comment.comment}</p>
                                 <br />
-                               
-                               
-                               
+   
                                 { props.isOwnPost  ?
                                   <button
                                   type="button"
@@ -503,9 +516,16 @@ function Audio(props) {
                           <div className="col blog-main text-center">
                             <div className="box">
                               <div className="box-content">
-                                <h2 className="tag-title">
-                                  {comment.userId.username}
-                                </h2>
+                              {props.userLogged.idUser !== comment.userId._id? 
+
+<h2 className="tag-title">
+<a onClick={ (e)=>props.otherUserView(e) }                     
+id={comment.userId._id}> {comment.userId.username} </a>
+</h2>
+:
+<h2 className="tag-title"> {comment.userId.username}</h2>
+
+}
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />
@@ -653,9 +673,16 @@ function Quote(props) {
                           <div className="col blog-main text-center">
                             <div className="box">
                               <div className="box-content">
-                                <h2 className="tag-title">
-                                  {comment.userId.username}
-                                </h2>
+                              {props.userLogged.idUser !== comment.userId._id? 
+
+<h2 className="tag-title">
+<a onClick={ (e)=>props.otherUserView(e) }                     
+id={comment.userId._id}> {comment.userId.username} </a>
+</h2>
+:
+<h2 className="tag-title"> {comment.userId.username}</h2>
+
+}
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />

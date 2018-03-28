@@ -137,7 +137,7 @@ export default class NavbarHead extends React.Component {
 
 
             {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}
-            {this.state.show === 'post'?<Post postId={this.state.postId} />:undefined}
+            {this.state.show === 'post'?<Post postId={this.state.postId} otherUserView={this.otherUserView} />:undefined}
             {this.state.show === 'timeline'?<Timeline userView={this.state.userView} userId={this.state.userId} search= {this.state.search} postView = {this.postView} show = {this.state.show} filter = {this.state.filter} header = {this.state.timelineName}/>:undefined}
             {this.state.show === 'following'?<Following otherUserView={this.otherUserView} />:undefined}
             {this.state.show === 'signin'?<Signin loged={this.loged} />:undefined}
