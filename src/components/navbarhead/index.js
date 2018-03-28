@@ -11,6 +11,7 @@ import Newpost from '../../components/newpost'
 import Post from '../../components/post'
 import Following from '../../components/following'
 import Signin from '../../components/signin'
+import storage from "../../services/storage"
 
 
 
@@ -30,7 +31,6 @@ export default class NavbarHead extends React.Component {
       timelineName: '',
       search: '',
       postId: '', 
-      userId: '5aafaa281ca9687a2d6bb1b4',
       userView : '',
       filter: 'ownPostsTimeline',
       loged: false,
@@ -62,6 +62,10 @@ export default class NavbarHead extends React.Component {
    this.setState({userView: e.target.id, timelineName: '·|selected user|·',  show:'timeline',filter: 'userTimeline' })
   }
 
+  signout = () =>{
+    storage.removeToken()
+  }
+
    
   updateSearch = (e) => {
     this.setState({ search: e.target.value, timelineName: '·|results|·' ,filter: 'searchPost' ,show:'timeline'})} 
@@ -89,6 +93,8 @@ export default class NavbarHead extends React.Component {
   render() {
     return (
       <div>
+
+        {this.state.loged === true ?
         <Navbar color="dark" className="navbar-dark" light expand="md">
           <NavbarBrand href="/"><h1 className="logonav"> ·|pause|·</h1></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -117,6 +123,9 @@ export default class NavbarHead extends React.Component {
               <NavItem>
                 <NavLink id='following'onClick={this.handleViews}href="">Following</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink id='following'className="text-warning" onClick={this.signout}href="">Logoff</NavLink>
+              </NavItem>
               <Form inline  id="search" onSubmit={ this.prevent }>
                 <FormGroup  id="search" className="mb-2 mr-sm-2 mb-sm-0">
                   <Input onChange={ this.updateSearch } type="Search" name="find" id="find" placeholder="Find..." />
@@ -124,7 +133,7 @@ export default class NavbarHead extends React.Component {
               </Form>
             </Nav>
           </Collapse>
-        </Navbar>
+        </Navbar> : undefined}
 
 
             {this.state.show === 'newpost'?<Newpost postResult= {this.postResult}/>:undefined}

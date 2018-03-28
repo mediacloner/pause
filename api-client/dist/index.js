@@ -35,14 +35,12 @@ var apiClient = {
     retrieveUser: function retrieveUser(id) {
         return data(axios.get(url.resolve(this.baseUrl(), 'user/' + id)));
     },
-    createComment: function createComment(id, userId, comment) {
-        // id == post
-        return data(axios.post(url.resolve(this.baseUrl(), 'comment/' + id), {
-            userId: userId, comment: comment
-        }));
-    },
     createPost: function createPost(title, shortDescription, fullDescription, token, idPostTemplate, namePostTemplate, tag, URLpath, time) {
         return data(axios.post(url.resolve(this.baseUrl(), 'post'), { title: title, shortDescription: shortDescription, fullDescription: fullDescription, idPostTemplate: idPostTemplate, namePostTemplate: namePostTemplate, tag: tag, URLpath: URLpath, time: time }, { headers: { 'Authorization': 'Bearer ' + token } }));
+    },
+    createComment: function createComment(id, token, comment) {
+        // id == post
+        return data(axios.post(url.resolve(this.baseUrl(), 'comment'), { id: id, comment: comment }, { headers: { 'Authorization': 'Bearer ' + token } }));
     },
     login: function login(username, password) {
         return data(axios.post(url.resolve(this.baseUrl(), 'login'), { username: username, password: password }));
@@ -51,6 +49,7 @@ var apiClient = {
         return data(axios.post(url.resolve(this.baseUrl(), 'user'), { name: name, surname: surname, email: email, username: username, password: password, city: city, country: country, about: about, timelineTitle: timelineTitle }));
     },
     deleteComment: function deleteComment(id) {
+        // id == post
         return data(axios.delete(url.resolve(this.baseUrl(), 'comment/' + id)));
     }
 };

@@ -33,7 +33,7 @@ const apiClient = {
         return data(axios.get(url.resolve(this.baseUrl(), `search/${word}`)))
     },
   
-    addKudo (id) {
+    addKudo (id) {  
         return data(axios.put(url.resolve(this.baseUrl(), `kudos/${id}`)))
     },
     retrievePost (id) {
@@ -45,15 +45,16 @@ const apiClient = {
 
 
 
-    createComment ( id, userId, comment) {  // id == post
-        return data(axios.post(url.resolve(this.baseUrl(), `comment/${id}`), {
-            userId, comment
-         })) 
-    },
-
+  
     createPost(  title, shortDescription, fullDescription, token, idPostTemplate,namePostTemplate,tag, URLpath, time) {
         return data(axios.post(url.resolve(this.baseUrl(), 'post'), {  title,shortDescription,fullDescription,idPostTemplate,namePostTemplate,tag, URLpath, time },{headers:{'Authorization':'Bearer ' + token}} ))
     },
+
+
+    createComment ( id, token, comment) {  // id == post
+        return data(axios.post(url.resolve(this.baseUrl(), 'comment'), {id, comment},{headers:{'Authorization':'Bearer ' + token}})) 
+    },
+
 
     login (username, password) {
         return data(axios.post(url.resolve(this.baseUrl(), 'login'), {  username, password}))
@@ -63,7 +64,7 @@ const apiClient = {
         return data(axios.post(url.resolve(this.baseUrl(), 'user'), { name, surname, email, username, password, city, country, about, timelineTitle  }))
     },
 
-    deleteComment ( id ){
+    deleteComment ( id ){ // id == post
         return data(axios.delete(url.resolve(this.baseUrl(), `comment/${id}`)))
     }
 

@@ -16,6 +16,7 @@ import WaveImg from "./../../img/wave.svg";
 import Moment from "react-moment";
 import "moment-timezone";
 import apiClient from "../../services/api-config";
+import storage from "../../services/storage"
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -37,12 +38,29 @@ export default class Post extends React.Component {
       showComments: false,
       comments: [],
       newComment: "",
-      counterKudos: 0
+      counterKudos: 0, 
+      userLogged:'',
+      isOwnPost: false
     };
   }
 
-  componentDidMount = () => {
-    this.retrievePost(this.props.postId);
+  componentWillMount = () =>{
+    this.updateData()
+  }
+/* 
+  componentWillReceiveProps = () => {
+    this.isOwnPost()
+  }; */
+
+
+
+  updateData = () => {
+    Promise.resolve( this.retrievePost(this.props.postId))
+    .then (this.setState({userLogged:JSON.parse(decodeURIComponent(escape(window.atob( storage.getToken().split('.')[1] ))))}))
+    .then(()=>{
+ 
+      this.state.owner._id === this.state.userLogged.idUser ?  this.setState({isOwnPost:true}) : this.setState({isOwnPost:false})
+    })
   };
 
   enableComments = e => {
@@ -60,7 +78,7 @@ export default class Post extends React.Component {
     apiClient
       .createComment(
         this.state.id,
-        "5aafaa281ca9687a2d6bb1b4",
+        storage.getToken(),
         this.state.newComment
       )
       .then(() => {
@@ -69,13 +87,25 @@ export default class Post extends React.Component {
       .catch(console.error);
   };
 
-  retrievePost = postId => {
+  deleteComment = (id) => {
+
+    console.log('delete!')
     apiClient
+      .deleteComment (id)
+      .then(() => {
+        this.retrievePost(this.props.postId);
+      })
+      .catch(console.error); 
+  };
+
+  retrievePost = postId => {
+   return Promise.resolve( apiClient
       .retrievePost(postId)
       .then(post => {
         return this.handleFillResult(post);
       })
-      .catch(console.error);
+      .catch(console.error)
+    )
   };
 
   addKudo = e => {
@@ -118,7 +148,7 @@ export default class Post extends React.Component {
       URLpath,
       kudos
     } = post.data[0];
-    this.setState({
+    return Promise.resolve(this.setState({
       id: _id, //test
       title,
       shortDescription,
@@ -132,7 +162,7 @@ export default class Post extends React.Component {
       createAt,
       URLpath,
       kudos
-    });
+    }))
   };
   render() {
     return (
@@ -158,6 +188,8 @@ export default class Post extends React.Component {
             addKudo={this.addKudo}
             counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
+            deleteComment={this.deleteComment}
+            isOwnPost={this.state.isOwnPost}
           />
         ) : (
           undefined
@@ -184,6 +216,8 @@ export default class Post extends React.Component {
             addKudo={this.addKudo}
             counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
+            deleteComment={this.deleteComment}
+            isOwnPost={this.state.isOwnPost}
           />
         ) : (
           undefined
@@ -209,6 +243,8 @@ export default class Post extends React.Component {
             addNewComment={this.addNewComment}
             counterKudos={this.state.counterKudos}
             enableComments={this.enableComments}
+            deleteComment={this.deleteComment}
+            isOwnPost={this.state.isOwnPost}
           />
         ) : (
           undefined
@@ -310,6 +346,20 @@ function Youtube(props) {
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />
+                               
+                               
+                               
+                                { props.isOwnPost  ?
+                                  <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                  onClick={e=> {
+                                    e.preventDefault()
+                                    props.deleteComment(comment._id)}}
+                                >Delete</button> :
+                                undefined
+                                }
+                                
                               </div>
                             </div>
                           </div>
@@ -447,7 +497,7 @@ function Audio(props) {
                       ·|comments|·
                     </h2>
 
-                    {props.comments.map((comment, index) => {
+                     {props.comments.map((comment, index) => {
                       return (
                         <div className="row" key={comment._id}>
                           <div className="col blog-main text-center">
@@ -459,6 +509,15 @@ function Audio(props) {
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />
+                                { props.isOwnPost  ?
+                                  <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                  onClick={e=> {
+                                    e.preventDefault()
+                                    props.deleteComment(comment._id)}}
+                                >Delete</button> : undefined
+                                }
                               </div>
                             </div>
                           </div>
@@ -588,25 +647,35 @@ function Quote(props) {
                     ·|comments|·
                   </h2>
 
-                  {props.comments.map((comment, index) => {
-                    return (
-                      <div className="row" key={comment._id}>
-                        <div className="col blog-main text-center">
-                          <div className="box">
-                            <div className="box-content">
-                              <h2 className="tag-title">
-                                {comment.userId.username}
-                              </h2>
-                              <hr />
-                              <p>{comment.comment}</p>
-                              <br />
+                   {props.comments.map((comment, index) => {
+                      return (
+                        <div className="row" key={comment._id}>
+                          <div className="col blog-main text-center">
+                            <div className="box">
+                              <div className="box-content">
+                                <h2 className="tag-title">
+                                  {comment.userId.username}
+                                </h2>
+                                <hr />
+                                <p>{comment.comment}</p>
+                                <br />
+                                { props.isOwnPost ?
+                                  <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                  onClick={e=> {
+                                    e.preventDefault()
+                                    props.deleteComment(comment._id)}}
+                                >Delete</button> :
+                                undefined
+                                }
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
 
                 <hr />
                 <Form>
