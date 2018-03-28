@@ -351,7 +351,7 @@ function Youtube(props) {
                               {props.userLogged.idUser !== comment.userId._id? 
 
                                 <h2 className="tag-title">
-                                <a onClick={ (e)=>props.otherUserView(e) }                     
+                                <a className="cursorPointer" onClick={ (e)=>props.otherUserView(e) }                     
                                 id={comment.userId._id}> {comment.userId.username} </a>
                                 </h2>
                               :
@@ -516,24 +516,24 @@ function Audio(props) {
                           <div className="col blog-main text-center">
                             <div className="box">
                               <div className="box-content">
-                              {props.userLogged.idUser !== comment.userId._id? 
+                                {props.userLogged.idUser !== comment.userId._id ?
 
-<h2 className="tag-title">
-<a onClick={ (e)=>props.otherUserView(e) }                     
-id={comment.userId._id}> {comment.userId.username} </a>
-</h2>
-:
-<h2 className="tag-title"> {comment.userId.username}</h2>
+                                  <h2 className="tag-title">
+                                    <a className="cursorPointer" onClick={(e) => props.otherUserView(e)}
+                                      id={comment.userId._id}> {comment.userId.username} </a>
+                                  </h2>
+                                  :
+                                  <h2 className="tag-title"> {comment.userId.username}</h2>
 
-}
+                                }
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />
-                                { props.isOwnPost  ?
+                                {props.isOwnPost ?
                                   <button
-                                  type="button"
-                                  className="btn btn-danger"
-                                  onClick={e=> {
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={e => {
                                     e.preventDefault()
                                     props.deleteComment(comment._id)}}
                                 >Delete</button> : undefined
@@ -673,16 +673,16 @@ function Quote(props) {
                           <div className="col blog-main text-center">
                             <div className="box">
                               <div className="box-content">
-                              {props.userLogged.idUser !== comment.userId._id? 
+                                {props.userLogged.idUser !== comment.userId._id ?
 
-<h2 className="tag-title">
-<a onClick={ (e)=>props.otherUserView(e) }                     
-id={comment.userId._id}> {comment.userId.username} </a>
-</h2>
-:
-<h2 className="tag-title"> {comment.userId.username}</h2>
+                                  <h2 className="tag-title">
+                                    <a className="cursorPointer" onClick={(e) => props.otherUserView(e)}
+                                      id={comment.userId._id}> {comment.userId.username} </a>
+                                  </h2>
+                                  :
+                                  <h2 className="tag-title"> {comment.userId.username}</h2>
 
-}
+                                }
                                 <hr />
                                 <p>{comment.comment}</p>
                                 <br />

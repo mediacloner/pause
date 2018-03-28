@@ -33,7 +33,10 @@
     height: 2.75rem;
     overflow-y: hidden;
   }
-  
+  .cursorPointer{
+
+    cursor: pointer
+  }
 
   .urlButton { 
     text-decoration: 'none'!important;
