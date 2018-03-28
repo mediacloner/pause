@@ -40,17 +40,25 @@ export default class Post extends React.Component {
       newComment: "",
       counterKudos: 0, 
       userLogged:'',
+      userLoggedFollow:[],
       isOwnPost: false
     };
   }
 
   componentWillMount = () =>{
     this.updateData()
+    this.getlistFollowingByUser(storage.getToken())
   }
-/* 
-  componentWillReceiveProps = () => {
-    this.isOwnPost()
-  }; */
+
+
+  getlistFollowingByUser = (token) => {
+    apiClient
+      .listFollowingByUser(token)
+      .then(followRes =>{ 
+        const userLoggedFollow = followRes.data.following || []
+        this.setState({ userLoggedFollow })})
+      .catch(console.error);
+  };
 
 
 
@@ -89,7 +97,7 @@ export default class Post extends React.Component {
 
   deleteComment = (id) => {
 
-    console.log('delete!')
+
     apiClient
       .deleteComment (id)
       .then(() => {
@@ -120,6 +128,23 @@ export default class Post extends React.Component {
         })
         .catch(console.error);
     }
+  };
+
+
+  follow = e => {
+      e.preventDefault()
+
+      apiClient
+        .follow(this.state.userLogged.idUser,this.state.owner._id)
+        .then(() => {
+          this.setState({ userFollow: this.state.owner._id });
+        })
+        .then(() => {
+          this.retrievePost(this.props.postId);
+          this.getlistFollowingByUser(storage.getToken())
+        })
+        .catch(console.error);
+    
   };
 
   youtubeParser = url => {
@@ -192,7 +217,8 @@ export default class Post extends React.Component {
             isOwnPost={this.state.isOwnPost}
             otherUserView={this.props.otherUserView}
             userLogged={this.state.userLogged}
-
+            userLoggedFollow={this.state.userLoggedFollow}
+            follow={this.follow}
           />
         ) : (
           undefined
@@ -223,6 +249,8 @@ export default class Post extends React.Component {
             isOwnPost={this.state.isOwnPost}
             otherUserView={this.props.otherUserView}
             userLogged={this.state.userLogged}
+            userLoggedFollow={this.state.userLoggedFollow}
+            follow={this.follow}
           />
         ) : (
           undefined
@@ -252,6 +280,8 @@ export default class Post extends React.Component {
             isOwnPost={this.state.isOwnPost}
             otherUserView={this.props.otherUserView}
             userLogged={this.state.userLogged}
+            userLoggedFollow={this.state.userLoggedFollow}
+            follow={this.follow}
           />
         ) : (
           undefined
@@ -277,9 +307,13 @@ function Youtube(props) {
                 </strong>
                 <h2 className="blog-post-title">{props.title} </h2>
                 <p className="blog-post-meta">
-                  {" "}
+                
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>
-                  <a href="">{props.owner.username}</a>
+                  <p className="text-dark"  >{props.owner.username} </p> 
+                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                  }
+                  
                 </p>
                 <h3>Short Description</h3>
                 <p>{props.shortDescription}</p>
@@ -356,8 +390,7 @@ function Youtube(props) {
                                 </h2>
                               :
                               <h2 className="tag-title"> {comment.userId.username}</h2>
-                            
-                            }
+                              }
                                   <hr />
                                 <p>{comment.comment}</p>
                                 <br />
@@ -453,7 +486,12 @@ function Audio(props) {
                 <h2 className="blog-post-title">{props.title}</h2>
                 <p className="blog-post-meta">
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>{" "}
-                  <a href="">{props.owner.username}</a>
+                  <p className="text-dark"  >{props.owner.username}</p> 
+                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                  }
+                  
+
                 </p>
                 <h3>Short Description</h3>
                 <p>{props.shortDescription}</p>
@@ -615,13 +653,18 @@ function Quote(props) {
               <strong className="d-inline-block mb-2 text-primary">
                 {props.tag}
               </strong>
-              <h2 className="blog-post-title">{props.title}</h2>
+              
               <p className="blog-post-meta">
-                {" "}
+
                 <Moment format="DD/MM/YYYY HH:MM ">
                   {props.createAt}
-                </Moment>{" "}
-                <a href="">{props.owner.username}</a>
+                </Moment>
+                <p className="text-dark"  >{props.owner.username}</p>
+                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                  }
+                  
+                    
               </p>
               <div className="jumbotron p-3 p-md-5 text-white rounded bg-dark">
                 <div className="col-md-6 px-0">

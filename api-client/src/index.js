@@ -36,14 +36,16 @@ const apiClient = {
     addKudo (id) {  
         return data(axios.put(url.resolve(this.baseUrl(), `kudos/${id}`)))
     },
+
+    follow (id,userFollow) {  
+        return data(axios.post(url.resolve(this.baseUrl(), `follow/${id}`),{userFollow}))
+    },
     retrievePost (id) {
         return data(axios.get(url.resolve(this.baseUrl(), `post/${id}`)))
     },
     retrieveUser (id) {
         return data(axios.get(url.resolve(this.baseUrl(), `user/${id}`)))
     },
-
-
 
   
     createPost(  title, shortDescription, fullDescription, token, idPostTemplate,namePostTemplate,tag, URLpath, time) {

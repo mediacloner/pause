@@ -81,15 +81,15 @@ export default class Timeline extends React.Component {
           {
              this.state.posts && this.state.posts.length >0 ?
             <div className="row">
-              <div className="col-md-12 text-right">
-                { this.props.filter ==='userTimeline' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
+              <div className="col-md-12 text-left">
+                { this.props.filter ==='userTimeline' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button className="mrg-left-small" outline size="sm" color="info">Follow</Button></h3>:undefined}
               </div>
             </div>:undefined
           }
 
-          <div className="row">
+          <div className="card-columns">
             {this.state.posts && this.state.posts.length ? this.state.posts.map((post, index) => {
-              return <div className="col-md-4 text-center" key={post._id}>
+              return <div className="card text-center" key={post._id}>
                   <div className="box">
                     <div className="box-content">
                       <h1 className="tag-title">{post.title}</h1>
@@ -101,9 +101,19 @@ export default class Timeline extends React.Component {
                       </a>
                     </div>
                   </div>
-                </div>;
-            }): <Container className="topmed"><img className="rounded mx-auto d-block" src={Nofound} alt="nofound" /> <h1 className="text-center logonav"> Ups! We don't have anything to show you.</h1></Container>}
-          </div>
+                </div> ;
+            }):undefined
+              }</div>
+
+              {this.state.posts && this.state.posts.length ? undefined :
+                <div className="row">
+                  <img className="rounded mx-auto d-block" src={Nofound} alt="nofound" />
+                  <h1 className="text-center logonav text-baseline"> Ups! We don't have anything to show you.</h1>
+                  </div>
+              }
+
+
+          
         </div>
       </div>;
   }

@@ -9,7 +9,6 @@
     border-radius: 5px;
     background-clip: padding-box;
     padding:0 20px 20px 20px;
-    min-height:340px;
   }
   
   .box:hover {
@@ -35,4 +34,14 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  }  
+  }
+  h1.tag-title {
+    font-size: 1.5rem
+  }
+  .card {
+    border:0;
+    background: transparent;
+  }
+  .container-no-found h1 {
+    margin-top: 20px;
+  }

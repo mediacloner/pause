@@ -29,6 +29,9 @@ var apiClient = {
     addKudo: function addKudo(id) {
         return data(axios.put(url.resolve(this.baseUrl(), 'kudos/' + id)));
     },
+    follow: function follow(id, userFollow) {
+        return data(axios.post(url.resolve(this.baseUrl(), 'follow/' + id), { userFollow: userFollow }));
+    },
     retrievePost: function retrievePost(id) {
         return data(axios.get(url.resolve(this.baseUrl(), 'post/' + id)));
     },

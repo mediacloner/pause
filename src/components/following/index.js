@@ -47,7 +47,7 @@ export default class Following extends React.Component {
               </tr>
             </thead>
             {             
-              this.state.following.length ? this.state.following.map((user, index) => 
+              this.state.following ? this.state.following.map((user, index) => 
             <tbody key = {index}>
               <tr>
                 <th scope="id">{user.userId.username}</th>
