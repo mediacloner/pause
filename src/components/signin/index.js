@@ -25,7 +25,7 @@ login = (e) =>{
       if (result.status === 'OK') {
         
 
-         storage.setToken(result.data.token)
+         storage.setToken(result.data.token)         
          this.setState({errorMsg: false})
          this.props.loged( true )
      

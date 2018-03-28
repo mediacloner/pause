@@ -1,6 +1,7 @@
 //import { NavLink } from 'react-router-dom'
 import React from 'react'
 import apiClient from "../../services/api-config"
+import storage from "../../services/storage"
 
 import {
  UncontrolledAlert, Table, Container, Button
@@ -13,16 +14,16 @@ export default class Following extends React.Component {
       following: []
     };
   }
-/* 5aafaac91ca9687a2d6bb1b5 */
-  getlistFollowingByUser = (id) => {
+
+  getlistFollowingByUser = (token) => {
     apiClient
-      .listFollowingByUser(id)
+      .listFollowingByUser(token)
       .then(followRes => this.setState({ following: followRes.data.following }))
       .catch(console.error);
   };
 
   componentDidMount() {
-    this.getlistFollowingByUser("5aafaa281ca9687a2d6bb1b4")
+    this.getlistFollowingByUser(storage.getToken())
 
   }
   componentWillReceiveProps(nextProps) {}

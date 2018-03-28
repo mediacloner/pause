@@ -11,18 +11,24 @@ const apiClient = {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')))
     },
 
-    listPostsByUser(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), `list/${id}`)))
+    listPostsByUser(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'listbyuser'),{headers:{'Authorization':'Bearer ' + token}}))
  
     },
 
-    listFollowingByUser(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), `following/${id}`)))
+    listPostsByGroup(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'listgroup'),{headers:{'Authorization':'Bearer ' + token}})) 
+    },
+
+    listFollowingByUser(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'following'),{headers:{'Authorization':'Bearer ' + token}})) 
  
     },
-    listPostsByGroup(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), `listgroup/${id}`))) 
+
+    listPostsSpecificUser(id) {
+        return data(axios.get(url.resolve(this.baseUrl(), `listpostuser/${id}`)))
     },
+
     search(word) {
         return data(axios.get(url.resolve(this.baseUrl(), `search/${word}`)))
     },
@@ -45,8 +51,8 @@ const apiClient = {
          })) 
     },
 
-    createPost(  title, shortDescription, fullDescription, owner,idPostTemplate,namePostTemplate,tag, URLpath, time) {
-        return data(axios.post(url.resolve(this.baseUrl(), 'post'), {  title,shortDescription,fullDescription,owner,idPostTemplate,namePostTemplate,tag, URLpath, time }))
+    createPost(  title, shortDescription, fullDescription, token, idPostTemplate,namePostTemplate,tag, URLpath, time) {
+        return data(axios.post(url.resolve(this.baseUrl(), 'post'), {  title,shortDescription,fullDescription,idPostTemplate,namePostTemplate,tag, URLpath, time },{headers:{'Authorization':'Bearer ' + token}} ))
     },
 
     login (username, password) {

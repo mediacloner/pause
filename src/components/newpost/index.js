@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import "../../styles/main.css";
 import apiClient from "../../services/api-config"
-
+import storage from "../../services/storage"
 
 export default class Newpost extends React.Component {
 
@@ -13,7 +13,6 @@ export default class Newpost extends React.Component {
         title:'',
         shortDescription:'',
         fullDescription:'',
-        owner:'5aafaa281ca9687a2d6bb1b4',
         idPostTemplate:'0',
         URLpath:'',
         tag:'',
@@ -23,7 +22,7 @@ export default class Newpost extends React.Component {
 
       addNewPost = (id) => {
        apiClient
-          .createPost(  this.state.title, this.state.shortDescription, this.state.fullDescription, this.state.owner,this.state.idPostTemplate,this.state.namePostTemplate,this.state.tag, this.state.URLpath, this.convertToSeconds(this.state.time))
+          .createPost(  this.state.title, this.state.shortDescription, this.state.fullDescription, storage.getToken(),this.state.idPostTemplate,this.state.namePostTemplate,this.state.tag, this.state.URLpath, this.convertToSeconds(this.state.time))
           .then(posts => this.setState({ posts: posts.data }))
           .then (this.props.postResult())
           .catch(console.error)
@@ -97,7 +96,7 @@ render() {
       <Form>
 
         <FormGroup row id="idPostTemplate">
-          <Label sm={2} for="select"><h5 class="text-info">Select</h5></Label>
+          <Label sm={2} for="select"><h5 className="text-info">Select</h5></Label>
           <Col sm={10}>
           <Input type="select" name="select" id="idPostTemplate" onChange={this.updatePost} >
             <option>Audio</option>

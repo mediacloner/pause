@@ -11,14 +11,17 @@ var apiClient = {
     listPosts: function listPosts() {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')));
     },
-    listPostsByUser: function listPostsByUser(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), 'list/' + id)));
+    listPostsByUser: function listPostsByUser(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'listbyuser'), { headers: { 'Authorization': 'Bearer ' + token } }));
     },
-    listFollowingByUser: function listFollowingByUser(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), 'following/' + id)));
+    listPostsByGroup: function listPostsByGroup(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'listgroup'), { headers: { 'Authorization': 'Bearer ' + token } }));
     },
-    listPostsByGroup: function listPostsByGroup(id) {
-        return data(axios.get(url.resolve(this.baseUrl(), 'listgroup/' + id)));
+    listFollowingByUser: function listFollowingByUser(token) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'following'), { headers: { 'Authorization': 'Bearer ' + token } }));
+    },
+    listPostsSpecificUser: function listPostsSpecificUser(id) {
+        return data(axios.get(url.resolve(this.baseUrl(), 'listpostuser/' + id)));
     },
     search: function search(word) {
         return data(axios.get(url.resolve(this.baseUrl(), 'search/' + word)));
@@ -38,8 +41,8 @@ var apiClient = {
             userId: userId, comment: comment
         }));
     },
-    createPost: function createPost(title, shortDescription, fullDescription, owner, idPostTemplate, namePostTemplate, tag, URLpath, time) {
-        return data(axios.post(url.resolve(this.baseUrl(), 'post'), { title: title, shortDescription: shortDescription, fullDescription: fullDescription, owner: owner, idPostTemplate: idPostTemplate, namePostTemplate: namePostTemplate, tag: tag, URLpath: URLpath, time: time }));
+    createPost: function createPost(title, shortDescription, fullDescription, token, idPostTemplate, namePostTemplate, tag, URLpath, time) {
+        return data(axios.post(url.resolve(this.baseUrl(), 'post'), { title: title, shortDescription: shortDescription, fullDescription: fullDescription, idPostTemplate: idPostTemplate, namePostTemplate: namePostTemplate, tag: tag, URLpath: URLpath, time: time }, { headers: { 'Authorization': 'Bearer ' + token } }));
     },
     login: function login(username, password) {
         return data(axios.post(url.resolve(this.baseUrl(), 'login'), { username: username, password: password }));

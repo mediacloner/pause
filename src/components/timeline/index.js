@@ -1,8 +1,10 @@
+
 //import { NavLink } from 'react-router-dom'
 import React from 'react'
 import apiClient from "../../services/api-config"
 import { Button, Container } from 'reactstrap';
 import Nofound from "./../../img/nofound.svg";
+import storage from '../../services/storage'
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -27,10 +29,19 @@ export default class Timeline extends React.Component {
       .catch(console.error)
   }
 
-  getListPostsByUser = (id) => {
+  getListPostsByUser = (token) => {
 
     apiClient
-      .listPostsByUser(id)
+      .listPostsByUser(token)
+      .then(posts => this.setState({ posts: posts.data }))
+      .catch(console.error)
+  }
+
+
+  getListPostsSpecificUser = (id) => {
+
+    apiClient
+      .listPostsSpecificUser(id)
       .then(posts => this.setState({ posts: posts.data }))
       .catch(console.error)
   }
@@ -44,15 +55,15 @@ export default class Timeline extends React.Component {
 
 
   componentDidMount() {
-    if (this.props.filter === 'ownPostsTimeline') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
-    else if (this.props.filter === 'followPostTimeline') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
+    if (this.props.filter === 'ownPostsTimeline') this.getListPostsByUser(storage.getToken())
+    else if (this.props.filter === 'followPostTimeline') this.getListPostsByGroup(storage.getToken())
     else if (this.props.filter === 'allPostTimeline') this.getListPosts()
     else if (this.props.filter === 'searchPost') this.search(this.props.search)
-    else if (this.props.filter === 'userTimeline') this.getListPostsByUser(this.props.userView)
+    else if (this.props.filter === 'userTimeline') this.getListPostsSpecificUser(this.props.userView)
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.filter === 'ownPostsTimeline') this.getListPostsByUser('5aafaa281ca9687a2d6bb1b4')
-    else if (nextProps.filter === 'followPostTimeline') this.getListPostsByGroup('5aafaa281ca9687a2d6bb1b4')
+    if (nextProps.filter === 'ownPostsTimeline') this.getListPostsByUser(storage.getToken())
+    else if (nextProps.filter === 'followPostTimeline') this.getListPostsByGroup(storage.getToken())
     else if (nextProps.filter === 'allPostTimeline') this.getListPosts()
     else if (nextProps.filter === 'searchPost') this.search(this.props.search)
     else if (nextProps.filter === 'userTimeline') this.getListPostsByUser(this.props.userView)}
@@ -68,7 +79,7 @@ export default class Timeline extends React.Component {
 
 
           {
-            this.state.posts.length > 0 ?
+             this.state.posts && this.state.posts.length >0 ?
             <div className="row">
               <div className="col-md-12 text-right">
                 {this.props.filter === 'ownPostsTimeline' || this.props.filter ==='userTimeline' ?<h3 className="text-secondary">{this.state.posts[0].owner.username}<Button outline size="sm" color="info">Follow</Button></h3>:undefined}
@@ -77,7 +88,7 @@ export default class Timeline extends React.Component {
           }
 
           <div className="row">
-            {this.state.posts.length ? this.state.posts.map((post, index) => {
+            {this.state.posts && this.state.posts.length ? this.state.posts.map((post, index) => {
               return <div className="col-md-4 text-center" key={post._id}>
                   <div className="box">
                     <div className="box-content">

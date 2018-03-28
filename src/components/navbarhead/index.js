@@ -53,6 +53,8 @@ export default class NavbarHead extends React.Component {
 
   loged = (swt) => {
     this.setState({ loged: swt })
+
+    swt ? this.setState( {timelineName: '·|my timeline|·', filter: 'ownPostsTimeline', show:'timeline'}):undefined
   }
 
   otherUserView = (e) => {
