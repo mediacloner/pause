@@ -4,9 +4,9 @@ const url = require('url')
 
 const apiClient = {
     baseUrl(){
-        return `${this.protocol}://${this.host}:${this.port}/api/`
+        return `${this.protocol}://${this.host}/api/`
     }, 
-    
+    //return `${this.protocol}://${this.host}:${this.port}/api/`
     listPosts () {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')))
     },

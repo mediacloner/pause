@@ -6,8 +6,10 @@ var url = require('url');
 
 var apiClient = {
     baseUrl: function baseUrl() {
-        return this.protocol + '://' + this.host + ':' + this.port + '/api/';
+        return this.protocol + '://' + this.host + '/api/';
     },
+
+    //return `${this.protocol}://${this.host}:${this.port}/api/`
     listPosts: function listPosts() {
         return data(axios.get(url.resolve(this.baseUrl(), 'list')));
     },

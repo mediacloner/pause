@@ -310,8 +310,8 @@ function Youtube(props) {
                 
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>
                   <p className="text-dark"  >{props.owner.username} </p> 
-                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
-                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow}  size="sm" color="success">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" outline size="sm" color="info">Follow</Button>
                   }
                   
                 </p>
@@ -487,8 +487,8 @@ function Audio(props) {
                 <p className="blog-post-meta">
                   <Moment format="DD/MM/YYYY HH:MM ">{props.createAt}</Moment>{" "}
                   <p className="text-dark"  >{props.owner.username}</p> 
-                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
-                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow}  size="sm" color="success">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" outline size="sm" color="info">Follow</Button>
                   }
                   
 
@@ -660,8 +660,8 @@ function Quote(props) {
                   {props.createAt}
                 </Moment>
                 <p className="text-dark"  >{props.owner.username}</p>
-                  { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow} outline size="sm" color="info">Follow</Button>:
-                    <Button className="mrg-left-small" onClick={props.follow} size="sm" color="success">Follow</Button>
+                { props.userLoggedFollow.some(fol =>fol.userId._id === props.owner._id)   ? <Button className="mrg-left-small" onClick={props.follow}  size="sm" color="success">Follow</Button>:
+                    <Button className="mrg-left-small" onClick={props.follow} size="sm" outline size="sm" color="info">Follow</Button>
                   }
                   
                     
