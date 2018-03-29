@@ -23,11 +23,15 @@
 
 ![Timeline](./doc/audioBlogPost.png)
 
+## User Cases
+
+
+![Data Model](./doc/usercase.png)
 
 ## Data Model
 
 
-![Data Model](./doc/dataModelv2.png)
+![Data Model](./doc/pausev3.png)
 
 
 ## Logo
