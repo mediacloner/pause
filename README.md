@@ -37,6 +37,12 @@
 ![Data Model](./doc/pausev3.png)
 
 
+## Block Data
+
+
+![Data Model](./doc/blockdata.png)
+
+
 ## Logo
 
  Lightweight logo created with one Google Font that can integrate easily anywhere.
@@ -75,6 +81,8 @@
 This proyect is connected to a specific API.
 
 [API Pause](https://github.com/mediacloner/pause-api)
+
+
 
 
 
