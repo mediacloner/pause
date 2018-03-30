@@ -78,7 +78,7 @@
 
 # API
 
-This proyect is connected to a specific API.
+This project is connected to a specific API.
 
 [API Pause](https://github.com/mediacloner/pause-api)
 
